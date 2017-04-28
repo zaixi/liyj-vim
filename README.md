@@ -5,8 +5,12 @@ sudo apt install autojump
 安装vim  
  sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev ruby-dev mercurial  
   
+安装Exuberant-ctags  sudo apt-get install Exuberant-ctags  
 安装ag     apt-get install silversearcher-ag  
-ycm编译  install.sh --clang-completer  
+ycm编译  
+sudo apt-get install build-essential cmake  
+sudo apt-get install python-dev python3-dev
+install.sh --clang-completer  
 vim-airline 安装字体  
 # clone  
 git clone https://github.com/powerline/fonts.git  
@@ -51,6 +55,9 @@ make && make install
 川北医学院  
 四川中医药高等专...  
 达州职业技术学院  
+  
+yun     29.204.231.0  
+guoxin  29.250.15.44  
+sudo zerotier-cli join 8056c2e21c000001  
+sudo zerotier-cli leave 8056c2e21c000001  
 
-yun     29.204.231.0
-guoxin  29.250.15.44
