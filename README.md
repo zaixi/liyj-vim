@@ -11,6 +11,16 @@ ycm编译
 sudo apt-get install build-essential cmake  
 sudo apt-get install python-dev python3-dev
 install.sh --clang-completer  
+cd ~  
+mkdir ycm_build  
+cd ycm_build  
+cmake -G "Unix Makefiles" -DUSE_SYSTEM_LIBCLANG=ON . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp  
+cmake --build . --target ycm_core --config Release  
+
+sudo apt-get install vim-addon-manager  #这应该是一个vim的插件管理器  
+sudo apt-get install vim-youcompleteme  #安装YCM  
+vim-addons install youcompleteme    #将YCM加入addons管理器中  
+
 vim-airline 安装字体  
 # clone  
 git clone https://github.com/powerline/fonts.git  
