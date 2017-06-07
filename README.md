@@ -72,3 +72,5 @@ sudo zerotier-cli join 8056c2e21c000001
 sudo zerotier-cli leave 8056c2e21c000001  
 
 au 命令 
+http://blog.rongpmcu.com/tag/linuxqu-dong/
+https://github.com/torvalds/linux/blob/v4.4/Documentation/gpio/driver.txt
