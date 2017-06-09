@@ -74,3 +74,5 @@ sudo zerotier-cli leave 8056c2e21c000001
 au 命令 
 http://blog.rongpmcu.com/tag/linuxqu-dong/
 https://github.com/torvalds/linux/blob/v4.4/Documentation/gpio/driver.txt
+http://blog.csdn.net/dlijun/article/details/51547897
+http://www.wowotech.net/gpio_subsystem/pin-controller-driver.html
