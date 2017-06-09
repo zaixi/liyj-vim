@@ -76,3 +76,4 @@ http://blog.rongpmcu.com/tag/linuxqu-dong/
 https://github.com/torvalds/linux/blob/v4.4/Documentation/gpio/driver.txt
 http://blog.csdn.net/dlijun/article/details/51547897
 http://www.wowotech.net/gpio_subsystem/pin-controller-driver.html
+http://blog.csdn.net/liwei16611/article/details/51323372
