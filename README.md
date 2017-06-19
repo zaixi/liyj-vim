@@ -5,20 +5,20 @@ sudo apt install autojump
 安装vim  
  sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev ruby-dev mercurial  
   
-安装Exuberant-ctags  sudo apt-get install Exuberant-ctags  
-安装ag和gtags apt-get install silversearcher-ag global
-安装g++ 4.9
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test 
-sudo apt-get update 
-sudo apt-get install gcc-4.9 
-sudo apt-get install g++-4.9 
-sudo cd /usr/bin 
-sudo ln -s /usr/bin/g++-4.9 /usr/bin/g++ -f 
-sudo ln -s /usr/bin/gcc-4.9 /usr/bin/gcc -f 
-ycm编译 
-sudo apt-get install build-essential cmake  
-sudo apt-get install python-dev python3-dev
-install.sh --clang-completer  
+安装Exuberant-ctags  sudo apt-get install Exuberant-ctags   
+安装ag和gtags apt-get install silversearcher-ag global  
+安装g++ 4.9  
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test  
+sudo apt-get update  
+sudo apt-get install gcc-4.9  
+sudo apt-get install g++-4.9  
+sudo cd /usr/bin  
+sudo ln -s /usr/bin/g++-4.9 /usr/bin/g++ -f  
+sudo ln -s /usr/bin/gcc-4.9 /usr/bin/gcc -f  
+ycm编译  
+sudo apt-get install build-essential cmake   
+sudo apt-get install python-dev python3-dev  
+install.sh --clang-completer   
 cd ~  
 mkdir ycm_build  
 cd ycm_build  
