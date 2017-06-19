@@ -19,9 +19,9 @@ sudo apt-get install vim-youcompleteme  #安装YCM
 vim-addons install youcompleteme    #将YCM加入addons管理器中  
 
 ## vim-airline 安装字体  
-### clone  
+* clone  
 git clone https://github.com/powerline/fonts.git  
-### install  
+* install  
 cd fonts  
 ./install.sh  
 ### clean-up a bit  
