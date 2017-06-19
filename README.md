@@ -24,17 +24,19 @@ git clone https://github.com/powerline/fonts.git
 * install  
 cd fonts  
 ./install.sh  
-### clean-up a bit  
+* clean-up a bit  
 cd ..  
 rm -rf fonts  
-### 选择字体
+* 选择字体
 终端右键，配置文件，配置文件首选项，自定义字体打勾，选择字体  
 推荐  
 droid sans mono for powerline regular  
 Cousine Powerline  
 Inconsolata-dz   
 ## 安装ag和gtags  
-'apt-get install silversearcher-ag global'  
+''' 
+apt-get install silversearcher-ag global
+'''  
 安装vim依赖  
 sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
     libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
