@@ -6,15 +6,8 @@ sudo apt install autojump
  sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev ruby-dev mercurial  
   
 安装Exuberant-ctags  sudo apt-get install Exuberant-ctags   
-安装ag和gtags apt-get install silversearcher-ag global  
-安装g++ 4.9  
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test  
-sudo apt-get update  
-sudo apt-get install gcc-4.9  
-sudo apt-get install g++-4.9  
-sudo cd /usr/bin  
-sudo ln -s /usr/bin/g++-4.9 /usr/bin/g++ -f  
-sudo ln -s /usr/bin/gcc-4.9 /usr/bin/gcc -f  
+  
+
 ycm编译  
 sudo apt-get install build-essential cmake   
 sudo apt-get install python-dev python3-dev  
@@ -50,12 +43,29 @@ droid sans mono for powerline regular
 Consolas  
 Cousine Powerline  
 Inconsolata  
-     
-gui慢  
+     
+安装依赖  
+sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
+    libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+    libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
+    python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git
+在Ubuntu 16.04中，将lua5.1-dev换成liblua5.1-dev
+
+安装ag和gtags  
+apt-get install silversearcher-ag global 
+   
+./configure --with-features=huge --enable-multibyte --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-python3interp --with-python3-config-dir=/usr/lib/python3.5/config --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-gui=gtk2 --enable-cscope --prefix=/usr --with-vim-name=vi --with-compiledby="liyj"  
   
-make && make install  
-  
-./configure --with-features=huge --enable-pythoninterp --enable-python3interp --enable-rubyinterp --enable-luainterp --enable-perlinterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-gui=gtk2 --enable-cscope --prefix=/usr --with-vim-name=vi --with-compiledby="liyj"  
+make -j4 && make install  
+ 
+安装g++ 4.9  
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test  
+sudo apt-get update  
+sudo apt-get install gcc-4.9  
+sudo apt-get install g++-4.9  
+sudo cd /usr/bin  
+sudo ln -s /usr/bin/g++-4.9 /usr/bin/g++ -f  
+sudo ln -s /usr/bin/gcc-4.9 /usr/bin/gcc -f  
   
 四川中医药高等专科学校：设有中医系、临床医学系、护理系、药学与检验系、针推保健系及基础部6个系  
 四川卫生康复职业学院，开设护理、康复治疗技术、医学影像技术、药学、医学检验技术、助产6个专业  
