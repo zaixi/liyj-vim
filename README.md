@@ -44,7 +44,10 @@ sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
     python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git
 在Ubuntu 16.04中，将lua5.1-dev换成liblua5.1-dev
 
-
+* 删除vim，如果你已经有了。  
+sudo apt-get remove vim vim-runtime gvim  
+* 在Ubuntu 12.04.2上，您可能还需要删除这些软件包：  
+sudo apt-get remove vim-tiny vim-common vim-gui-common vim-nox  
    
 ./configure --with-features=huge --enable-multibyte --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-python3interp --with-python3-config-dir=/usr/lib/python3.5/config --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-gui=gtk2 --enable-cscope --prefix=/usr --with-vim-name=vi --with-compiledby="liyj"  
   
