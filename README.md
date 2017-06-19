@@ -2,12 +2,8 @@
 直达目录  
 sudo apt install autojump  
   
-安装vim  
- sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev ruby-dev mercurial  
-  
 安装Exuberant-ctags  sudo apt-get install Exuberant-ctags   
   
-
 ycm编译  
 sudo apt-get install build-essential cmake   
 sudo apt-get install python-dev python3-dev  
@@ -22,37 +18,31 @@ sudo apt-get install vim-addon-manager  #这应该是一个vim的插件管理器
 sudo apt-get install vim-youcompleteme  #安装YCM  
 vim-addons install youcompleteme    #将YCM加入addons管理器中  
 
-vim-airline 安装字体  
-# clone  
+## vim-airline 安装字体  
+### clone  
 git clone https://github.com/powerline/fonts.git  
-# install  
+### install  
 cd fonts  
 ./install.sh  
-# clean-up a bit  
+### clean-up a bit  
 cd ..  
 rm -rf fonts  
-终端右键，配置文件，配置文件首选项，自定义字体打勾，选择字体  
-  
-错位  
-DejaVu Sans Mono for powerline book  
-ubuntu mono derivative  
-字体  
-Source Code Pro  
+### 选择字体
+终端右键，配置文件，配置文件首选项，自定义字体打勾，选择字体  
 推荐  
 droid sans mono for powerline regular  
-Consolas  
 Cousine Powerline  
-Inconsolata  
-     
-安装依赖  
+Inconsolata-dz   
+## 安装ag和gtags  
+'apt-get install silversearcher-ag global'  
+安装vim依赖  
 sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
     libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
     libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
     python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git
 在Ubuntu 16.04中，将lua5.1-dev换成liblua5.1-dev
 
-安装ag和gtags  
-apt-get install silversearcher-ag global 
+
    
 ./configure --with-features=huge --enable-multibyte --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-python3interp --with-python3-config-dir=/usr/lib/python3.5/config --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-gui=gtk2 --enable-cscope --prefix=/usr --with-vim-name=vi --with-compiledby="liyj"  
   
