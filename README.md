@@ -50,15 +50,7 @@ droid sans mono for powerline regular
 Consolas  
 Cousine Powerline  
 Inconsolata  
-  
-http://babun.github.io/  
-ctags 跳转  
-主题风格  
-集成git  
-tabar  
-  
-https://github.com/hyiltiz/vim-plugins-profile  
-使用构建工具的话，github上有一个叫YCM-Generator的插件，可以根据构建工具自动生成.ycm_extra_conf.py文件  
+     
 gui慢  
   
 make && make install  
@@ -80,9 +72,9 @@ sudo zerotier-cli join 8056c2e21c000001
 sudo zerotier-cli leave 8056c2e21c000001  
 
 au 命令 
-http://blog.rongpmcu.com/tag/linuxqu-dong/
-https://github.com/torvalds/linux/blob/v4.4/Documentation/gpio/driver.txt
-http://blog.csdn.net/dlijun/article/details/51547897
-http://www.wowotech.net/gpio_subsystem/pin-controller-driver.html
-http://blog.csdn.net/liwei16611/article/details/51323372
-http://blog.csdn.net/dlijun/article/details/51547897
+http://blog.rongpmcu.com/tag/linuxqu-dong/  
+https://github.com/torvalds/linux/blob/v4.4/Documentation/gpio/driver.txt  
+http://blog.csdn.net/dlijun/article/details/51547897  
+http://www.wowotech.net/gpio_subsystem/pin-controller-driver.html  
+http://blog.csdn.net/liwei16611/article/details/51323372  
+http://blog.csdn.net/dlijun/article/details/51547897  
