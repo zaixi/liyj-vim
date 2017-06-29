@@ -1,7 +1,6 @@
 " Vim config file.
 
 let mapleader=";"                   " 定义快捷键的前缀，即<Leader>
-
 " 非Plugin设置: {{{
 
 "一般设置:{{{
@@ -28,15 +27,11 @@ set wildmode=list:full              " 增强模式打开列表
 "set noerrorbells                    " 关闭错误信息响铃
 "set novisualbell                    " 关闭可视化响铃代替呼叫
 "set t_vb=                           " 置空错误响铃终端代码
-"}}}
-
-" 外观设置:{{{
-"
 set cuc								" 高亮光标所在列
 set cul                             " 高亮光标所在行
-"set ruler							" 显示当前的行号列号
 set number							" 显示行号
 set laststatus=2					" 显示状态栏 (默认值为 1, 无法显示状态栏)
+set updatetime=10
 "}}}
 
 " write:{{{
@@ -60,8 +55,6 @@ set report=0					        " 通过使用: commands命令，告诉我们文件的�
 set showmatch						" 插入括号时，短暂地跳转到匹配的对应括号
 set matchtime=1						" 短暂跳转到匹配括号的时间（单位是十分之一秒）
 set ignorecase smartcase            " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
-"set nowrapscan                      " 禁止在搜索到文件两端时重新搜索
-"set incsearch						" 键入字符串的过程中就开始搜索
 set hlsearch                        " 高亮搜索结果
 "}}}
 
@@ -176,21 +169,23 @@ endif
 set rtp+=~/.vim/bundle/Vundle.vim
 call plug#begin('~/.vim/bundle')
 Plug 'tpope/vim-fugitive'
+"Plug 'majutsushi/tagbar'							" 标签浏览
 Plug 'tpope/vim-fugitive', {'on': []}
 Plug 'majutsushi/tagbar',{'on':[]}							" 标签浏览
+Plug 'bronson/vim-trailing-whitespace' ,{'on':[]}                 " 尾随空格
 Plug 'aceofall/gtags.vim', {'on':[]}					" global
 Plug 'jsfaint/gen_tags.vim',{'on':[]}				"global更新
-Plug 'bronson/vim-trailing-whitespace' ,{'on':[]}                 " 尾随空格
-
+Plug 'scrooloose/nerdcommenter',{'on' :[] }                         " 快速注释
+Plug 'bling/vim-airline',{'on' : []}                                " 状态栏优化
+Plug 'vim-airline/vim-airline-themes', {'on' : []}                   " 状态栏主题
 augroup load_Write
   autocmd!
-  autocmd BufWrite * call plug#load('vim-fugitive','tagbar','gtags.vim','gen_tags.vim','vim-trailing-whitespace')
+  autocmd CursorHold * call plug#load('tagbar','vim-airline','vim-airline-themes','gtags.vim','gen_tags.vim','vim-trailing-whitespace','nerdcommenter')
 					 \| autocmd! load_Write
 augroup END
-
-Plug 'bling/vim-airline'                                " 状态栏优化
-Plug 'vim-airline/vim-airline-themes'                   " 状态栏主题
-Plug 'nathanaelkane/vim-indent-guides'                  " 缩进可视化
+"Plug 'bling/vim-airline'                                " 状态栏优化
+"Plug 'vim-airline/vim-airline-themes'                   " 状态栏主题
+"Plug 'nathanaelkane/vim-indent-guides'                  " 缩进可视化
 Plug 'scrooloose/nerdtree',{'on':'NERDTreeToggle'}      " 目录树
 Plug 'Xuyuanp/nerdtree-git-plugin',{'on':'NERDTreeToggle'}                    " 目录树显示git状态
 "Plug 'jistr/vim-nerdtree-tabs'                         " 目录树自启动
@@ -201,22 +196,15 @@ Plug 'terryma/vim-multiple-cursors'                     " 多行编辑
 "Plug 'tomasr/molokai'                                  " 配色
 "Plug 'altercation/vim-colors-solarized'                 " 配色
 "Bundle 'desert256.vim'                                 " 配色
-
 Plug 'Valloric/YouCompleteMe',{ 'on': []}                           " 超级补全
 Plug 'SirVer/ultisnips',{ 'on': []}                               " 模版补全
 Plug 'honza/vim-snippets',{'on':[]}                               " 模版补全语法文件
-"Plug 'rdnetto/YCM-Generator'                            " 自动生成超级补全配置
+Plug 'rdnetto/YCM-Generator'                            " 自动生成超级补全配置
 augroup load_Inser
   autocmd!
-  autocmd InsertEnter * call plug#load('ultisnips', 'YouCompleteMe', 'vim-snippets')
+  autocmd InsertEnter * call plug#load('ultisnips', 'YouCompleteMe', 'vim-snippets','vim-fugitive')
 					 \| autocmd! load_Inser
 augroup END
-
-"Plug 'scrooloose/nerdcommenter'                         " 快速注释
-Plug 'scrooloose/nerdcommenter',{'on' : '<Plug>(NERD'}                         " 快速注释
-map <leader>cc <Plug>(NERDCommenterComment)
-map <leader>cu <plug>(NERDComUncommentLine)
-
 Plug 'vim-scripts/a.vim',{'on': ['A']}                                " .h和.c切换
 Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(Easy' } " 快速对齐
 Plug 'ctrlpvim/ctrlp.vim', {'on': ['CtrlP', 'CtrlPMixed', 'CtrlPMRU']}        " 文件查找
@@ -225,9 +213,9 @@ Plug 'vim-scripts/DoxygenToolkit.vim',{'on': ['Dox','DoxLic','DoxAuthor']}				  
 Plug 'skywind3000/asyncrun.vim',{'on': 'AsyncRun'}                         " 异步执行
 "Plug 'w0rp/ale'                                        " 异步语法检查
 Plug 'sjl/gundo.vim'                                    " 多分支撤销
-"Plug 'powerline/fonts'                                 " 字体
 Plug 'jiangmiao/auto-pairs'                             " 结对符补全
 Plug 'luochen1990/rainbow'                              " 彩虹括号
+Plug 'itchyny/lightline.vim'						" 状态栏优化
 call plug#end()
 "}}}
 
@@ -244,10 +232,10 @@ let g:airline#extensions#whitespace#enabled = 0                     " 关闭状�
 let g:airline#extensions#branch#enabled = 1                         " 启用git集成
 let g:airline#extensions#branch#vcs_priority = ["git", "mercurial"] " a
 " 去掉尾部的错误和警告
-let g:airline#extensions#default#layout = [
-            \ [ 'a', 'b', 'c' ],
-            \ [ 'x', 'y', 'z', 'error', 'warning' ]
-            \ ]
+"let g:airline#extensions#default#layout = [
+            "\ [ 'a', 'b', 'c' ],
+            "\ [ 'x', 'y', 'z', 'error', 'warning' ]
+            "\ ]
 " \ "[ 'x', 'y', 'z' ]
 let g:airline_symbols = {}                                          " 正确显示分隔符
 let g:airline_symbols.branch = ''
@@ -277,13 +265,9 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 "autocmd User AirlineAfterInit call AirlineInit()
 "}}}
 
-" A.vim设置:{{{
-" }}}
-
 " color:{{{
 set t_Co=256
 let g:rehash256 = 1
-"set background=dark
 colorscheme molokai
 "set background=dark
 "colorscheme solarized                         " 配色
@@ -463,8 +447,8 @@ nnoremap <Leader>rw :call Replace(0, 1, input('Replace '.expand('<cword>').' wit
 " 确认、非整词
 nnoremap <Leader>rc :call Replace(1, 0, input('Replace '.expand('<cword>').' with: '))<CR>
 " 确认、整词
-nnoremap <Leader>rcw :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
-nnoremap <Leader>rwc :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
+nnoremap <Leader>cw :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
+nnoremap <Leader>wc :call Replace(1, 1, input('Replace '.expand('<cword>').' with: '))<CR>
 " }}}
 
 " 快速对齐: {{{
@@ -511,7 +495,7 @@ map <leader>. <Plug>(easymotion-repeat)
 " DoxygenToolkit 注释{{{
 nmap <leader>lic :DoxLic<CR>
 nmap <leader>au :DoxAuthor<CR>
-nmap <leader>c :Dox<CR>
+nmap <leader>cf :Dox<CR>
 "}}}
 
 " AsyncRun 异步执行操作:{{{
@@ -533,7 +517,7 @@ nnoremap <C-p> :CtrlP<CR>
 "s:查找函数名、宏、枚举值等出现的地方
 nmap <leader>d :cs find s <C-R>=expand("<cword>")<CR><CR>
 "g: 查找函数、宏、枚举等定义的位置
-nmap <leader>r :cs find g <C-R>=expand("<cword>")<CR><CR>
+map <C-]> :cs find g <C-R>=expand("<cword>")<CR><CR>
 "c: 查找调用本函数的函数
 nmap <leader>s :cs find c <C-R>=expand("<cword>")<CR><CR>
 "
@@ -541,7 +525,7 @@ set cscopetag " 使用 cscope 作为 tags 命令
 set cscopeprg='gtags-cscope' " 使用 gtags-cscope 代替 cscope
 nmap <F4> :GtagsCursor<CR><CR>
 "cs add /opt/v1.9-dev/GTAGS
-"cs add GTAGS
+cs add GTAGS
 "GenGTAGS 设置
 let GtagsCscope_Auto_Load = 1
 let CtagsCscope_Auto_Map = 1
@@ -566,7 +550,12 @@ nnoremap [b :bprevious<cr>
 nnoremap ]b :bnext<cr>
 
 " 新建tab  Ctrl+t
-nnoremap <C-t>     :tabnew<CR>
-inoremap <C-t>     <Esc>:tabnew<CR>
+" <C-t>     :tabnew<CR>
+"inoremap <C-t>     <Esc>:tabnew<CR>
 "}}}
 
+set regexpengine=1
+"set vbs=4
+"set ttyfast
+"folding=manual
+set clipboard=exclude:.*
