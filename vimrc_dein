@@ -171,29 +171,28 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 set nocompatible              " 去除VI一致性,必须
 "filetype off                  " 必须
 
-
-
-
 let plugin_manager_readme=expand('~/.vim/plug/repos/github.com/Shougo/dein.vim/README.md')
 let plugin_manager_name="dein"
 if !filereadable(plugin_manager_readme)
     echo "Installing ".plugin_manager_name."..."
     echo ""
     silent !mkdir -p ~/.vim/plug
-    "silent !git clone https://github.com/Shougo/dein.vim ~/.vim/plug/dein.vim >/dev/null 2>&1
     silent !git clone https://github.com/Shougo/dein.vim ~/.vim/plug/repos/github.com/Shougo/dein.vim
 endif
 
 
-"set runtimepath+=~/.vim/plug/repos/github.com/Shougo/dein.vim
+
+command PlugInstall :call dein#install()
+command PlugUpdata  :call dein#update()
 set runtimepath+=~/.vim/plug/repos/github.com/Shougo/dein.vim
 
-"if dein#load_state('~/.vim/plug')
 if dein#load_state('~/vim/plug/')
 	call dein#begin('~/.vim/plug')
 
-	"call dein#add('~/vim/vplug/repos/github.com/Shougo/dein.vim')
-	call dein#add('Shougo/dein.vim')
+	call dein#add('itchyny/lightline.vim')							" 状态栏优化
+
+	call dein#add('Shougo/dein.vim',{
+				\'on_cmd' : 'PlugInstall'})							" vim插件管理器
 	call dein#add('tpope/vim-fugitive',{
 				\'on_cmd' :['Gstatus','Gdiff']})					" git集成
 	call dein#add('majutsushi/tagbar',{
@@ -224,15 +223,6 @@ if dein#load_state('~/vim/plug/')
 	call dein#add('junegunn/vim-easy-align',{
 				\'on_map': '<Plug>(EasyAlign)'})					" 快速对齐
 
-	call dein#add('Valloric/YouCompleteMe',{
-				\'on_event': 'InsertEnter'})						" 超级补全
-	call dein#add('SirVer/ultisnips',{
-				\'on_event': 'InsertEnter'})						" 模版补全
-	call dein#add('honza/vim-snippets',{
-				\'on_event': 'InsertEnter'})						" 模版补全语法文件
-	call dein#add('jiangmiao/auto-pairs',{
-				\'on_event': 'InsertEnter'})						" 结对符补全
-
 	call dein#add('easymotion/vim-easymotion',{
 				\'on_event': 'CursorHold'})							" 快速移动
 	call dein#add('luochen1990/rainbow',{
@@ -246,15 +236,25 @@ if dein#load_state('~/vim/plug/')
 	call dein#add('vim-airline/vim-airline-themes',{
 				\'on_event': 'CursorHold'})							" 状态栏主题
 
-	call dein#add('itchyny/lightline.vim')							" 状态栏优化
+	call dein#add('jiangmiao/auto-pairs',{
+				\'on_event': 'InsertEnter'})						" 结对符补全
+	call dein#add('honza/vim-snippets',{
+				\'on_event': 'InsertEnter'})						" 模版补全语法文件
+	call dein#add('SirVer/ultisnips',{
+				\'on_event': 'InsertEnter'})						" 模版补全
+	call dein#add('Valloric/YouCompleteMe',{
+				\'on_event': 'InsertEnter'})						" 超级补全
+
+
 
 	"call dein#add('nathanaelkane/vim-indent-guides')               " 缩进可视化
 	"call dein#add('jistr/vim-nerdtree-tabs')                       " 目录树自启动
 	"call dein#add('vim-scripts/CSApprox')                          " 正确显示gvim配色
 	"call dein#add('sunuslee/vim-plugin-random-colorscheme-picker') " 随机选择配色
 	"call dein#add('tomasr/molokai')                                " 配色
+	"call dein#add('tomasr/molokai',{'on_event': 'CursorHold'})                                " 配色
 	"call dein#add('altercation/vim-colors-solarized')              " 配色
-	"call dein#add('desert256.vim')                                 " 配色
+	"call dein#add('vim-scripts/desert256.vim')                                 " 配色
 	"call dein#add('rdnetto/YCM-Generator')                         " 自动生成超级补全配置
 	"call dein#add('w0rp/ale')                                      " 异步语法检查
 "if dein#check_install()
