@@ -51,9 +51,9 @@ Inconsolata-dz   
    
 `./configure --with-features=huge --enable-multibyte --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-python3interp --with-python3-config-dir=/usr/lib/python3.5/config --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-gui=gtk2 --enable-cscope --prefix=/usr --with-vim-name=vi --with-compiledby="liyj"`    
 
-```
+`
 ./configure --with-features=huge --enable-multibyte --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-cscope --prefix=/usr --with-compiledby="liyj"
-```
+`
   
 make -j4 && make install  
  
