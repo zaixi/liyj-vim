@@ -171,23 +171,21 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 set nocompatible              " 去除VI一致性,必须
 "filetype off                  " 必须
 
-let plugin_manager_readme=expand('~/.vim/plug/repos/github.com/Shougo/dein.vim/README.md')
+let plugin_manager_readme=expand('$HOME/.vim/plug/repos/github.com/Shougo/dein.vim/README.md')
 let plugin_manager_name="dein"
 if !filereadable(plugin_manager_readme)
     echo "Installing ".plugin_manager_name."..."
     echo ""
-    silent !mkdir -p ~/.vim/plug
-    silent !git clone https://github.com/Shougo/dein.vim ~/.vim/plug/repos/github.com/Shougo/dein.vim
+    silent !mkdir $HOMEp $HOME/.vim/plug
+    silent !git clone https://github.com/Shougo/dein.vim $HOME/.vim/plug/repos/github.com/Shougo/dein.vim
 endif
-
-
 
 command PlugInstall :call dein#install()
 command PlugUpdata  :call dein#update()
-set runtimepath+=~/.vim/plug/repos/github.com/Shougo/dein.vim
+set runtimepath+=$HOME/.vim/plug/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('~/vim/plug/')
-	call dein#begin('~/.vim/plug')
+if dein#load_state('$HOME/.vim/plug/')
+	call dein#begin('$HOME/.vim/plug')
 
 	call dein#add('itchyny/lightline.vim')							" 状态栏优化
 
@@ -236,6 +234,10 @@ if dein#load_state('~/vim/plug/')
 	call dein#add('vim-airline/vim-airline-themes',{
 				\'on_event': 'CursorHold'})							" 状态栏主题
 
+	call dein#add('rdnetto/YCM-Generator',{
+				\'on_cmd' : ['InsertEnter']}) 						" 自动生成超级补全配置
+	call dein#add('w0rp/ale',{
+                 \'on_event': 'InsertEnter'}) 						" 异步语法检查
 	call dein#add('jiangmiao/auto-pairs',{
 				\'on_event': 'InsertEnter'})						" 结对符补全
 	call dein#add('honza/vim-snippets',{
@@ -245,18 +247,14 @@ if dein#load_state('~/vim/plug/')
 	call dein#add('Valloric/YouCompleteMe',{
 				\'on_event': 'InsertEnter'})						" 超级补全
 
-
-
 	"call dein#add('nathanaelkane/vim-indent-guides')               " 缩进可视化
 	"call dein#add('jistr/vim-nerdtree-tabs')                       " 目录树自启动
 	"call dein#add('vim-scripts/CSApprox')                          " 正确显示gvim配色
 	"call dein#add('sunuslee/vim-plugin-random-colorscheme-picker') " 随机选择配色
 	"call dein#add('tomasr/molokai')                                " 配色
-	"call dein#add('tomasr/molokai',{'on_event': 'CursorHold'})                                " 配色
+	"call dein#add('tomasr/molokai',{'on_event': 'CursorHold'})		" 配色
 	"call dein#add('altercation/vim-colors-solarized')              " 配色
-	"call dein#add('vim-scripts/desert256.vim')                                 " 配色
-	"call dein#add('rdnetto/YCM-Generator')                         " 自动生成超级补全配置
-	"call dein#add('w0rp/ale')                                      " 异步语法检查
+	"call dein#add('vim-scripts/desert256.vim') 					" 配色
 "if dein#check_install()
     "call dein#install()
 "endif
@@ -269,6 +267,7 @@ syntax enable
 "}}}
 
 " 插件设置:{{{
+
 " airline状态栏:{{{
 let g:airline_powerline_fonts = 1                                   " 这个是安装字体后 必须设置此项
 let g:airline_theme= 'bubblegum'
@@ -390,6 +389,7 @@ let g:tagbar_compact=1
 "" 选中项
 "highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
 " 补全功能在注释中同样有效
+"let g:loaded_youcompleteme = 1
 let g:ycm_complete_in_comments=1
 "在字符串输入中也能补全
 let g:ycm_complete_in_strings =1
@@ -399,9 +399,6 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_confirm_extra_conf=0
 " 开启 YCM 标签补全引擎
 let g:ycm_collect_identifiers_from_tags_files=1
-" 引入 C++ 标准库tags
-"set tags+=/data/misc/software/misc./vim/stdcpp.tags
-set tags+=.
 " YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
 inoremap <leader>; <C-x><C-o>
 " 补全内容不以分割子窗口形式出现，只显示补全列表

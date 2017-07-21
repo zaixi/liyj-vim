@@ -1,8 +1,7 @@
 " Vim config file.
 
-" 非Plugin设置: {{{
-
 let mapleader=";"                   " 定义快捷键的前缀，即<Leader>
+" 非Plugin设置: {{{
 
 "一般设置:{{{
 "
@@ -10,8 +9,7 @@ let mapleader=";"                   " 定义快捷键的前缀，即<Leader>
 "filetype plugin on					" 载入文件类型插件
 "filetype indent on					" 为特定文件类型载入相关缩进文件
 "syntax on							" 语法高亮
-"set viminfo+=!						" 保存全局变量
-set viminfo='20,<50,s10
+set viminfo+=!						" 保存全局变量
 set nocompatible					" 不要使用vi的键盘模式，而是vim自己的
 set confirm							" 在处理未保存或只读文件的时候，弹出确认
 set autoread                        " 设置当文件被改动时自动载入
@@ -49,6 +47,8 @@ set selection=inclusive             " 光标所在位置被选中
 set selectmode=mouse,key
 set report=0					        " 通过使用: commands命令，告诉我们文件的哪一行被改变过
 "set fillchars=vert:\ ,stl:\ ,stlnc:\     " 在被分割的窗口间显示空白，便于阅读
+"set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %l,%c,%L,%p%%\ %y\ %0(%{&fileformat}\ %{&encoding}%)\ %{strftime(\"%y/%m/%d\ %H:%M\")}
+" 设置在状态行显示的信息
 "}}}
 
 " 搜索和匹配:{{{
@@ -104,7 +104,7 @@ set helplang=cn                     " 帮助系统设置为中文
 " 其他:{{{
 "打开自动定位到最后编辑的位置,需要确认 .viminfo 当前用户可写
 if has("autocmd")
-	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif         " 离开插入模式后自动关闭预览窗口
 
@@ -155,119 +155,73 @@ nnoremap <leader>p "+p
 " 去掉搜索高亮
 noremap <silent><leader>/ :nohls<CR>
 nnoremap <F10> :set number!<CR>
-" 粘贴模式{{{
-set pastetoggle=<F4>            "    when in insert mode, press <F4> to go to
-au InsertLeave * set nopaste
-function! XTermPasteBegin()
-    set pastetoggle=<Esc>[201~
-    set paste
-    return ""
-endfunction
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-"}}}
 "}}}
 
 " bundle:{{{
-set nocompatible              " 去除VI一致性,必须
+"set nocompatible              " 去除VI一致性,必须
 "filetype off                  " 必须
-
-let plugin_manager_readme=expand('$HOME/.vim/plug/repos/github.com/Shougo/dein.vim/README.md')
-let plugin_manager_name="dein"
-if !filereadable(plugin_manager_readme)
-    echo "Installing ".plugin_manager_name."..."
-    echo ""
-    silent !mkdir $HOMEp $HOME/.vim/plug
-    silent !git clone https://github.com/Shougo/dein.vim $HOME/.vim/plug/repos/github.com/Shougo/dein.vim
+if empty(glob('~/.vim/autoload/plug.vim'))
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-command PlugInstall :call dein#install()
-command PlugUpdata  :call dein#update()
-set runtimepath+=$HOME/.vim/plug/repos/github.com/Shougo/dein.vim
+set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin('~/.vim/bundle')
+Plug 'tpope/vim-fugitive'
+"Plug 'majutsushi/tagbar'							" 标签浏览
+Plug 'tpope/vim-fugitive', {'on': []}
+Plug 'majutsushi/tagbar',{'on':[]}							" 标签浏览
+Plug 'bronson/vim-trailing-whitespace' ,{'on':[]}                 " 尾随空格
+Plug 'aceofall/gtags.vim', {'on':[]}					" global
+Plug 'jsfaint/gen_tags.vim',{'on':[]}				"global更新
+Plug 'scrooloose/nerdcommenter',{'on' :[] }                         " 快速注释
+Plug 'vim-airline/vim-airline-themes', {'on' : []}                   " 状态栏主题
+Plug 'bling/vim-airline',{'on' : []}                                " 状态栏优化
+augroup load_write
+  autocmd!
+  autocmd cursorhold * call plug#load('tagbar','vim-airline','vim-airline-themes','gtags.vim','gen_tags.vim','vim-trailing-whitespace','nerdcommenter')
+					 \| autocmd! load_write
+  autocmd cursorhold * :autocmd! load_write
+augroup end
 
-if dein#load_state('$HOME/.vim/plug/')
-	call dein#begin('$HOME/.vim/plug')
-
-	call dein#add('itchyny/lightline.vim')							" 状态栏优化
-
-	call dein#add('Shougo/dein.vim',{
-				\'on_cmd' : 'PlugInstall'})							" vim插件管理器
-	call dein#add('tpope/vim-fugitive',{
-				\'on_cmd' :['Gstatus','Gdiff']})					" git集成
-	call dein#add('majutsushi/tagbar',{
-				\'on_cmd': 'TagbarToggle'})							" 标签浏览
-	call dein#add('jsfaint/gen_tags.vim',{
-				\'on_cmd': 'GenGTAGS'})								" gnu global更新
-	call dein#add('vim-scripts/DoxygenToolkit.vim',{
-				\'on_cmd': ['Dox','DoxAuthor','DoxLic']})			" Doxygen风格注释
-	call dein#add('skywind3000/asyncrun.vim',{
-				\'on_cmd': 'AsyncRun'})								" 异步执行
-	call dein#add('sjl/gundo.vim',{
-				\'on_cmd': 'GundoToggle'})							" 多分支撤销
-	call dein#add('ctrlpvim/ctrlp.vim',{
-				\'on_cmd': ['CtrlP', 'CtrlPMixed', 'CtrlPMRU']})	" 文件查找
-	call dein#add('scrooloose/nerdtree',{
-				\'on_cmd': 'NERDTreeToggle' })						" 目录树
-	call dein#add('Xuyuanp/nerdtree-git-plugin',{
-				\'on_cmd': 'NERDTreeToggle' })						" 目录树显示git状态
-	call dein#add('dyng/ctrlsf.vim',{
-				\'on_cmd': 'CtrlSF'})								" 搜索
-	call dein#add('terryma/vim-multiple-cursors',{
-				\'on_event': 'CursorHold'})							" 多行编辑
-	call dein#add('vim-scripts/a.vim',{
-				\'on_cmd': 'A'})									" .h和.c切换
-
-	call dein#add('scrooloose/nerdcommenter',{
-				\'on_map': [';cc',';cu']})							" 快速注释
-	call dein#add('junegunn/vim-easy-align',{
-				\'on_map': '<Plug>(EasyAlign)'})					" 快速对齐
-
-	call dein#add('easymotion/vim-easymotion',{
-				\'on_event': 'CursorHold'})							" 快速移动
-	call dein#add('luochen1990/rainbow',{
-				\'on_event': 'CursorHold'})							" 彩虹括号
-	call dein#add('bronson/vim-trailing-whitespace',{
-				\'on_event': 'CursorHold'})							" 去除尾随空格
-	call dein#add('aceofall/gtags.vim',{
-				\'on_event': 'CursorHold'})							" gnu global
-	call dein#add('bling/vim-airline',{
-				\'on_event': 'CursorHold'})							" 状态栏优化
-	call dein#add('vim-airline/vim-airline-themes',{
-				\'on_event': 'CursorHold'})							" 状态栏主题
-
-	call dein#add('rdnetto/YCM-Generator',{
-				\'on_cmd' : ['InsertEnter']}) 						" 自动生成超级补全配置
-	call dein#add('w0rp/ale',{
-                 \'on_event': 'InsertEnter'}) 						" 异步语法检查
-	call dein#add('jiangmiao/auto-pairs',{
-				\'on_event': 'InsertEnter'})						" 结对符补全
-	call dein#add('honza/vim-snippets',{
-				\'on_event': 'InsertEnter'})						" 模版补全语法文件
-	call dein#add('SirVer/ultisnips',{
-				\'on_event': 'InsertEnter'})						" 模版补全
-	call dein#add('Valloric/YouCompleteMe',{
-				\'on_event': 'InsertEnter'})						" 超级补全
-
-	"call dein#add('nathanaelkane/vim-indent-guides')               " 缩进可视化
-	"call dein#add('jistr/vim-nerdtree-tabs')                       " 目录树自启动
-	"call dein#add('vim-scripts/CSApprox')                          " 正确显示gvim配色
-	"call dein#add('sunuslee/vim-plugin-random-colorscheme-picker') " 随机选择配色
-	"call dein#add('tomasr/molokai')                                " 配色
-	"call dein#add('tomasr/molokai',{'on_event': 'CursorHold'})		" 配色
-	"call dein#add('altercation/vim-colors-solarized')              " 配色
-	"call dein#add('vim-scripts/desert256.vim') 					" 配色
-"if dein#check_install()
-    "call dein#install()
-"endif
-	call dein#end()
-	call dein#save_state()
-endif
-filetype plugin indent on
-syntax enable
-
+"Plug 'bling/vim-airline'                                " 状态栏优化
+"Plug 'vim-airline/vim-airline-themes'                   " 状态栏主题
+"Plug 'nathanaelkane/vim-indent-guides'                  " 缩进可视化
+Plug 'scrooloose/nerdtree',{'on':'NERDTreeToggle'}      " 目录树
+Plug 'Xuyuanp/nerdtree-git-plugin',{'on':'NERDTreeToggle'}                    " 目录树显示git状态
+"Plug 'jistr/vim-nerdtree-tabs'                         " 目录树自启动
+Plug 'dyng/ctrlsf.vim' ,{'on': 'CtrlSF'}                                 " 搜索
+Plug 'terryma/vim-multiple-cursors'                     " 多行编辑
+"Plug 'vim-scripts/CSApprox'                            " 正确显示gvim配色
+"Plug 'sunuslee/vim-plugin-random-colorscheme-picker'   " 随机选择配色
+"Plug 'tomasr/molokai'                                  " 配色
+"Plug 'altercation/vim-colors-solarized'                 " 配色
+"Bundle 'desert256.vim'                                 " 配色
+Plug 'Valloric/YouCompleteMe',{ 'on': []}                           " 超级补全
+Plug 'SirVer/ultisnips',{ 'on': []}                               " 模版补全
+Plug 'honza/vim-snippets',{'on':[]}                               " 模版补全语法文件
+Plug 'rdnetto/YCM-Generator'                            " 自动生成超级补全配置
+augroup load_Inser
+  autocmd!
+  autocmd InsertEnter * call plug#load('ultisnips', 'YouCompleteMe', 'vim-snippets','vim-fugitive')
+					 \| autocmd! load_Inser
+augroup END
+Plug 'vim-scripts/a.vim',{'on': ['A']}                                " .h和.c切换
+Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(Easy' } " 快速对齐
+Plug 'ctrlpvim/ctrlp.vim', {'on': ['CtrlP', 'CtrlPMixed', 'CtrlPMRU']}        " 文件查找
+Plug 'easymotion/vim-easymotion', { 'on': '<Plug>(easymotion' }                        " 快速移动
+Plug 'vim-scripts/DoxygenToolkit.vim',{'on': ['Dox','DoxLic','DoxAuthor']}				    " 自动生成注释
+Plug 'skywind3000/asyncrun.vim',{'on': 'AsyncRun'}                         " 异步执行
+"Plug 'w0rp/ale'                                        " 异步语法检查
+Plug 'sjl/gundo.vim'                                    " 多分支撤销
+Plug 'jiangmiao/auto-pairs'                             " 结对符补全
+Plug 'luochen1990/rainbow'                              " 彩虹括号
+Plug 'itchyny/lightline.vim'						" 状态栏优化
+call plug#end()
 "}}}
 
 " 插件设置:{{{
-
 " airline状态栏:{{{
 let g:airline_powerline_fonts = 1                                   " 这个是安装字体后 必须设置此项
 let g:airline_theme= 'bubblegum'
@@ -278,8 +232,6 @@ let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'        " 不显示�
 "let g:airline_skip_empty_sections = 1                               " 不为空的部分绘制分隔符
 let g:airline#extensions#whitespace#enabled = 0                     " 关闭状态显示空白符号计数
 let g:airline#extensions#branch#enabled = 1                         " 启用git集成
-"let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
-"let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 let g:airline#extensions#branch#vcs_priority = ["git", "mercurial"] " a
 " 去掉尾部的错误和警告
 "let g:airline#extensions#default#layout = [
@@ -318,7 +270,9 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 " color:{{{
 set t_Co=256
 let g:rehash256 = 1
+"colorscheme phd
 colorscheme molokai
+"colorscheme valloric
 "set background=dark
 "colorscheme solarized                         " 配色
 "set termguicolors desert256
@@ -378,8 +332,8 @@ let g:tagbar_compact=1
 
 " 多行编辑:{{{
 " vim-multiple-cursors 快捷键
-"let g:multi_cursor_next_key='<C-n>'
-"let g:multi_cursor_skip_key='<C-k>'
+"let g:multi_cursor_next_key='<S-n>'
+"let g:multi_cursor_skip_key='<S-k>'
 "}}}
 
 " YCM设置:{{{
@@ -389,7 +343,6 @@ let g:tagbar_compact=1
 "" 选中项
 "highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
 " 补全功能在注释中同样有效
-"let g:loaded_youcompleteme = 1
 let g:ycm_complete_in_comments=1
 "在字符串输入中也能补全
 let g:ycm_complete_in_strings =1
@@ -399,6 +352,9 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_confirm_extra_conf=0
 " 开启 YCM 标签补全引擎
 let g:ycm_collect_identifiers_from_tags_files=1
+" 引入 C++ 标准库tags
+"set tags+=/data/misc/software/misc./vim/stdcpp.tags
+set tags+=.
 " YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
 inoremap <leader>; <C-x><C-o>
 " 补全内容不以分割子窗口形式出现，只显示补全列表
@@ -519,7 +475,6 @@ let g:ctrlp_max_height=15
 let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
-nnoremap <C-p> :CtrlP<CR>
 "}}}
 
 " 彩虹括号{{{
@@ -552,13 +507,14 @@ augroup vimrc
     autocmd User AsyncRunStart call asyncrun#quickfix_toggle(8, 1)
 augroup END
 noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
+"let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 map <F5> :AsyncRun make<CR>
-let g:asyncrun_encs = 'gbk'
 "}}}
 " 去除行尾空格
 nnoremap <leader><space> :FixWhitespace<cr>
 " 调用 gundo 树
 nnoremap <Leader>ud :GundoToggle<CR>
+nnoremap <C-p> :CtrlP<CR>
 "}}}
 
 " global {{{
@@ -581,6 +537,17 @@ let GtagsCscope_Quiet = 1
 au BufWritePost exec GenGTAGS
 "}}}
 
+" 粘贴模式{{{
+set pastetoggle=<F4>            "    when in insert mode, press <F5> to go to
+au InsertLeave * set nopaste
+function! XTermPasteBegin()
+    set pastetoggle=<Esc>[201~
+    set paste
+    return ""
+endfunction
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+"}}}
+
 " tab 相关{{{
 " 切换前后buffer
 nnoremap [b :bprevious<cr>
@@ -596,3 +563,5 @@ set regexpengine=1
 "set ttyfast
 "folding=manual
 set clipboard=exclude:.*
+
+"set list lcs=tab:\|\ 
