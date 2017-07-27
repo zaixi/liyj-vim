@@ -67,17 +67,14 @@ vim-addons install youcompleteme    #将YCM加入addons管理器中
 
 
 安装vim依赖  
-`sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
-    libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+`sudo apt-get install libncurses5-dev  \
+     libatk1.0-dev libbonoboui2-dev \
     libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
     python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev git`
-在Ubuntu 16.04中，将lua5.1-dev换成liblua5.1-dev
-
-   
-`./configure --with-features=huge --enable-multibyte --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-python3interp --with-python3-config-dir=/usr/lib/python3.5/config --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-gui=gtk2 --enable-cscope --prefix=/usr --with-vim-name=vi --with-compiledby="liyj"`    
+在Ubuntu 16.04中，将lua5.1-dev换成liblua5.1-dev  
 
 `
-./configure --with-features=huge --enable-multibyte --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-cscope --disable-gui --prefix= --with-compiledby="liyj"
+./configure --with-features=huge --enable-multibyte --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-cscope --disable-gui --with-compiledby="liyj"
 `
   
 make -j4 && make install  
