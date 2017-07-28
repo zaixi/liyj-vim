@@ -122,3 +122,8 @@ vim
 #Inconsolata-dz
 
 #安装youcompleteme
+#sudo apt-get install software-properties-common
+#sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+#sudo apt-get update
+#sudo apt-get install g++-5
+#ln -s /usr/bin/g++-5 /usr/bin/g++ -f
