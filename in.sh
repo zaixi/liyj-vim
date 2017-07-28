@@ -39,7 +39,7 @@ fi
 version=`lsb_release -rs`
 version=${version%%.*}
 
-PATH=`pwd`
+path=`pwd`
 if test $version -eq "14";
 then
 	echo ----------------改变更新源---------------------
@@ -58,7 +58,7 @@ cd vim
 make -j4
 sudo apt-get -y remove vim vim-runtime gvim vim-tiny vim-common vim-gui-common vim-nox
 sudo make install
-cd $PATH
+cd $path
 mv $HOME/.vim $HOME/.vimback
 mv $HOME/.vimrc $HOME/.vimrcback
 cp .vim $HOME/ -a
