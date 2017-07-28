@@ -43,15 +43,15 @@ path=`pwd`
 if test $version -eq "14";
 then
 	echo ----------------改变更新源---------------------
-    mv /etc/apt/sources.list /etc/apt/sources.listback
-	cp ./sources.list /etc/apt/sources.list
+    sudo mv /etc/apt/sources.list /etc/apt/sources.listback
+	sudo cp ./sources.list /etc/apt/sources.list
 	sudo apt-get update
 fi
 
 echo --------------------安装vim依赖--------------------
 sudo apt-get -y install silversearcher-ag global xz-utils python-dev cmake aptitude libncurses5-dev ruby-dev lua5.1 lua5.1-dev libperl-dev
 echo --------------------下载vim源代码------------------
-git clone http://github.com/vim/vim
+git clone --depth=1 http://github.com/vim/vim
 echo --------------------编译安装vim--------------------
 cd vim
 ./configure --with-features=huge --enable-multibyte --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-cscope --disable-gui
@@ -63,40 +63,31 @@ mv $HOME/.vim $HOME/.vimback
 mv $HOME/.vimrc $HOME/.vimrcback
 cp .vim $HOME/ -a
 cp .vimrc $HOME/.vimrc
+echo --------------------安装字体--------------------
+git clone --depth=1 http://github.com/powerline/fonts.git
+cd fonts
+./install.sh
+cd ..
 
+##读取系统位数
+if [ $(getconf WORD_BIT) = '32' ] && [ $(getconf LONG_BIT) = '64' ] ; then
+	echo 64位
+	ycm_flag="--clang-completer"
+else
+	echo 32位
+	ycm_flag="--clang-completer --system-libclang"
+	sudo apt-get -y remove clang-3.3 clang-3.4 clang-3.5 clang-3.6 clang-3.8
+	sudo apt-get -y install clang-3.9
+fi
 
 if test $version -eq "14";
 then
 	echo ------------------------还原更新源----------------
-    mv /etc/apt/sources.listback /etc/apt/sources.list
-	#sudo apt-get update
+    sudo mv /etc/apt/sources.listback /etc/apt/sources.list
+	sudo apt-get update
 fi
 vim
-:PlugInstall
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-##读取系统位数
-#if [ $(getconf WORD_BIT) = '32' ] && [ $(getconf LONG_BIT) = '64' ] ; then
-	#echo 64位
-	#ycm_flag="--clang-completer"
-#else
-	#echo 32位
-	#ycm_flag="--clang-completer --system-libclang"
-#fi
 
 
 
@@ -108,14 +99,9 @@ vim
     #echo '文件不存在!'
 #fi
 #echo $ycm_flag
+#git submodule update --init --recursive
 
 
-#安装字体
-#git clone https://github.com/powerline/fonts.git
-#cd fonts
-#./install.sh
-#cd ..
-#rm -rf fonts
 #选择字体 终端右键，配置文件，配置文件首选项，自定义字体打勾，选择字体   推荐
 #droid sans mono for powerline regular
 #Cousine Powerline
