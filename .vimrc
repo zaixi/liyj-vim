@@ -183,7 +183,7 @@ endif
 command PlugInstall :call dein#install()
 command PlugUpdata  :call dein#update()
 let g:dein#install_max_processes=16
-let g:dein#types#git#default_protocol=http
+"let g:dein#types#git#default_protocol="http"
 let g:dein#types#git#clone_depth=1
 let g:dein#install_process_timeout = 240
 set runtimepath+=$HOME/.vim/plug/repos/github.com/Shougo/dein.vim
@@ -249,7 +249,7 @@ if dein#load_state('$HOME/.vim/plug/')
 	call dein#add('SirVer/ultisnips',{
 				\'on_event': 'InsertEnter'})						" 模版补全
 	call dein#add('Valloric/YouCompleteMe',{
-				\'merged'：0,
+				\'merged': 0,
 				\'on_event': 'InsertEnter'})						" 超级补全
 
 	"call dein#add('nathanaelkane/vim-indent-guides')               " 缩进可视化
