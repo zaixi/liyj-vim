@@ -255,9 +255,9 @@ if dein#load_state('$HOME/.vim/plug/')
 	"call dein#add('tomasr/molokai',{'on_event': 'CursorHold'})		" 配色
 	"call dein#add('altercation/vim-colors-solarized')              " 配色
 	"call dein#add('vim-scripts/desert256.vim') 					" 配色
-"if dein#check_install()
-    "call dein#install()
-"endif
+if dein#check_install()
+	call dein#install()
+endif
 	call dein#end()
 	call dein#save_state()
 endif
