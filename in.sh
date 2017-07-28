@@ -60,7 +60,7 @@ sudo make install
 mv ~/.vim ~/.vimback
 mv ~/.vimrc ~/.vimrcback
 cp .vim ~/ -a
-cp .vimrc ~/
+cp .vimrc ~/.vimrc
 
 
 if test $version -eq "14";
