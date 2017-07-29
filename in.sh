@@ -88,18 +88,14 @@ then
 fi
 vim
 
-
-
-
-##if test -e $HOME/.vim/plug/repos/github.com
-#if test -e $HOME/.vim/plug/repos/github.com/Valloric/YouCompleteMe/
-#then
-    #echo '文件已存在!'
-#else
-    #echo '文件不存在!'
-#fi
-#echo $ycm_flag
-#git submodule update --init --recursive
+if test -e $HOME/.vim/plug/repos/github.com/Valloric/YouCompleteMe/
+then
+	cd $HOME/.vim/plug/repos/github.com/Valloric/YouCompleteMe
+	git submodule update --init --recursive
+	./install.py $ycm_flag
+else
+	echo '请重新下载YouCompleteMe插件'
+fi
 
 
 #选择字体 终端右键，配置文件，配置文件首选项，自定义字体打勾，选择字体   推荐

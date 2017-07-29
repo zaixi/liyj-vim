@@ -182,8 +182,6 @@ endif
 
 command PlugInstall :call dein#install()
 command PlugUpdata  :call dein#update()
-let g:dein#install_max_processes=16
-"let g:dein#types#git#default_protocol="http"
 let g:dein#types#git#clone_depth=1
 let g:dein#install_process_timeout = 240
 set runtimepath+=$HOME/.vim/plug/repos/github.com/Shougo/dein.vim
