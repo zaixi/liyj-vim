@@ -1,13 +1,71 @@
-# liyj-vim
-## vim-airline 安装字体  
-* clone  
-`git clone https://github.com/powerline/fonts.git`  
-* install  
-`cd fonts`  
-`./install.sh`  
-* clean-up a bit  
-`cd ..`  
-`rm -rf fonts`  
+[TOC]
+liyj-vim
+=======================
+
+
+> VERSION: 1.0
+
+> LAST_UPDATE_TIME: 2017-08-01
+
+> 本次更新: 小版本更新, ubuntu14 16支持ycm快速安装
+
+
+---------------------------------
+---------------------------------
+
+# 自动安装
+**自动安装目前只支持ubuntu14和ubuntu16版本**
+### 1. clone 到本地
+
+```
+git clone https://github.com/zaixi/liyj-vim
+```
+
+### 2. 安装
+```
+cd liyj-vim
+./install.sh  /* 安装依赖和8.0版本VIM以及VIM插件 */
+```
+然后等待自动安装完成，安装完成后退出vim
+```
+./install.sh /* 编译YouCompleteMe自动补全插件 */
+```
+
+# 手动安装步骤
+
+### 1. clone 到本地
+
+```
+git clone https://github.com/zaixi/liyj-vim
+```
+
+
+### 2. 安装依赖包
+```
+# ubuntu
+sudo apt-get install build-essential xz-utils cmake python-dev  #编译YCM自动补全插件依赖
+sudo apt-get install silversearcher-ag                          #grep替代品,比grep更快
+sudo apt-get install global                                     #ctags替代品，比ctags更好用
+sudo apt-get install aptitude libncurses5-dev ruby-dev lua5.1 lua5.1-dev libperl-dev #编译VIM依赖库
+```
+
+### 3. 源代码安装VIM8
+```
+sudo apt-get remove vim vim-runtime gvim vim-tiny vim-common vim-gui-common vim-nox #卸载原有的VIM
+git clone --depth=1 http://github.com/vim/vim
+cd vim
+./configure --with-features=huge --enable-multibyte --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-cscope
+make -j4
+sudo make install
+```
+
+### 安装vim-airline字体  
+```
+git clone https://github.com/powerline/fonts.git
+cd fonts
+./install.sh
+cd ..
+```
 * 选择字体
 终端右键，配置文件，配置文件首选项，自定义字体打勾，选择字体   
 推荐   
