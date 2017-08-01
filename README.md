@@ -139,16 +139,26 @@ F12 对齐当前文件
 
 
 ## FAQ
+### 安装依赖报错
+可能是软件源陈旧，可以临时换用网易163的源安装后再换回去
+
 ### 编译YouCompleteMe自动补全插件报错
 查看报错提示，可能是g++不支持C++11，需要重新安装
 安装g++ 4.9  
-`sudo add-apt-repository ppa:ubuntu-toolchain-r/test` 
-`sudo apt-get update`  
-`sudo apt-get install gcc-4.9`  
-`sudo apt-get install g++-4.9`  
-`sudo cd /usr/bin`  
-`sudo ln -s /usr/bin/g++-4.9 /usr/bin/g++ -f`  
-`sudo ln -s /usr/bin/gcc-4.9 /usr/bin/gcc -f`  
+```
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install gcc-4.9
+sudo apt-get install g++-4.9
+sudo cd /usr/bin
+sudo ln -s /usr/bin/g++-4.9 /usr/bin/g++ -f
+sudo ln -s /usr/bin/gcc-4.9 /usr/bin/gcc -f
+```
   
  ### 下载VIM插件很慢，或者YouCompleteMe下载失败，总是提示重新安装
  插件来源于github，和网速有很大关系，可以采用其他下载方式，再手动放到相应目录
+ ```
+wget -O ~/YouCompleteMe.tar.gz "http://ohpunyak1.bkt.clouddn.com/YouCompleteMe.tar.gz?v=9999"
+cd ~/.vim/plug/repos/github.com/Valloric
+tar -zxf ~/YouCompleteMe.tar.gz
+ ```
