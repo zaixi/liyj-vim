@@ -135,12 +135,21 @@ Gdiff 相当于git diff
 ctrl + ]   跳转到光标下单词的定义
 <leader>s  查找光标下单词的引用  
 <leader>d  查找光标下单词出现的地方
+使用之前需要像ctags生成tag文件
+在项目根目录运行gtags,只需要生成一次，以后w保存时更新当前tags文件
 ```
 
 ### 6. [nerdcommenter](https://github.com/scrooloose/nerdcommenter)
 ```
 <leader>cc 注释选中区域或当前行  
 <leader>cu 取消注释选中区域或当前行  
+```
+
+### 2.  [asyncrun](https://github.com/skywind3000/asyncrun.vim)
+```
+AsyncRun {command} 异步执行command
+eg：
+  AsyncRun ls 异步列出当前文件
 ```
 
 ### 4. [nerdtree](https://github.com/scrooloose/nerdtree)
@@ -188,6 +197,10 @@ sudo apt-get install silversearcher-ag global
 PlugInstall 安装插件
 PlugUpdata  更新插件
 ```
+
+### 4. [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
+自动补全插件
+![补全效果](http://i.imgur.com/0OP4ood.gif)
 
 F4 进入粘贴模式，从其他地方粘贴过来的代码格式不会变化  
 F5 在当前目录下异步执行make  
