@@ -200,10 +200,12 @@ PlugUpdata  更新插件
 
 ### 4. [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 自动补全插件
+ctrl + space 手动触发，注意此快捷键常和系统输入法冲突
 ![补全效果](http://i.imgur.com/0OP4ood.gif)
 
-F4 进入粘贴模式，从其他地方粘贴过来的代码格式不会变化  
-F5 在当前目录下异步执行make  
+### 其他快捷键
+F4 进入粘贴模式，从其他地方粘贴过来的代码格式不会变化  
+F5 在当前目录下异步执行make  
 F11 全屏切换  
 F12 对齐当前文件  
 
