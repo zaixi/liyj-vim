@@ -45,7 +45,7 @@ liyj-vim
     - [16. [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)](#16.-[YouCompleteMe](https://github.com/Valloric/YouCompleteMe))
     - [17. 其他快捷键](#17.-其他快捷键)
 - [FAQ](#FAQ)
-    - [安装依赖报错](#安装依赖报错)
+    - [安装依赖报错](#安装依赖报错)
     - [编译YouCompleteMe自动补全插件报错](#编译YouCompleteMe自动补全插件报错)
 
 
