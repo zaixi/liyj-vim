@@ -152,10 +152,14 @@ sudo apt-get install silversearcher-ag global
 光标在行首，输入sia光标跳到indtall的i处  
 
 ### 4. [gundo](https://github.com/sjl/gundo.vim)
-<leader>ud 撤销分支树，选中之前的节点，回车就可以回到之前修改或撤销的状态
+/<leader>ud 撤销分支树，选中之前的节点，回车就可以回到之前修改或撤销的状态
 
 ### 4. [DoxygenToolkit](https://github.com/vim-scripts/DoxygenToolkit.vim)
 <leader>cf 生成Doxygen风格注释  
+
+### 4. [dein](https://github.com/Shougo/dein.vim)
+PlugInstall 安装插件
+PlugUpdata  更新插件
 
 F4 进入粘贴模式，从其他地方粘贴过来的代码格式不会变化  
 F5 在当前目录下异步执行make  
