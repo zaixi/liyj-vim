@@ -114,6 +114,7 @@ Gstatus 相当于git status  
 Gdiff 相当于git diff
 
 ### 2.  [tagbar](https://github.com/majutsushi/tagbar)
+
 <leader>lt 相当于taglist  
 
 ### 3. [trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)
