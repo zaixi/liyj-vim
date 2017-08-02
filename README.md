@@ -107,29 +107,54 @@ sudo apt-get remove clang-3.3 clang-3.4 clang-3.5 clang-3.6 clang-3.8
 sudo apt-get install clang-3.9
 ./install.py --clang-completer --system-libclang
 ```
-
+### 4. [](https://github.com/)
 ## 使用说明
+### 1. git操作[fugitive](https://github.com/tpope/vim-fugitive)
 Gstatus 相当于git status  
-Gdiff 相当于git diff，  
+Gdiff 相当于git diff
+
+### 2.  [tagbar](https://github.com/majutsushi/tagbar)
 <leader>lt 相当于taglist  
+
+### 3. [trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)
 <leader><space> 去除行尾空格  
-<leader>s  查找光标下单词的引用  
-<leader>d  查找光标下单词出现的地方  
+
+### 4. [ctrlsf](https://github.com/dyng/ctrlsf.vim)
+<leader>sp 搜索光标下单词
+
+### 5. [gtags](http://www.gnu.org/software/global)
+ctrl + ]   跳转到光标下单词的定义
+<leader>s  查找光标下单词的引用  
+<leader>d  查找光标下单词出现的地方
+
+### 6. [nerdcommenter](https://github.com/scrooloose/nerdcommenter)
 <leader>cc 注释选中区域或当前行  
 <leader>cu 取消注释选中区域或当前行  
+
+### 4. [nerdtree](https://github.com/scrooloose/nerdtree)
 <leader>fl 显示文件列表  
-<leader>sp 搜索光标下单词  
+ 
+ ### 4. [easy-align](https://github.com/junegunn/vim-easy-align)
 <leader>a  对齐选中区域(可根据空格，等号，引号等对齐)，vim-easy-align的功能  
 eg:<leader>a=  根据"="对齐选中区域  
 eg:<leader>a,  根据","对齐选中区域  
+
+### 4. [ctrlp](https://github.com/ctrlpvim/ctrlp.vim)
 ctrl+p 进入文件搜索模式，输入文件名可搜索文件(默认当前目录), 输入..可以把搜索目录向上移动
+
+### 4. [multiple-cursors](https://github.com/terryma/vim-multiple-cursors)
 ctrl+n 选中当前单词，再按ctrl+n选中下一个同样的单词，选完后按c批量修改  
 
+### 4. [easymotion](https://github.com/easymotion/vim-easymotion)
 s + {任意字符}  快速移动到指定位置,vim-easymotion的功能  
 例子：已有一行数据为  
 sudo apt-get install silversearcher-ag global  
 光标在行首，输入sia光标跳到indtall的i处  
-<leader>ud 撤销分支树，可以回到之前修改或撤销的状态  
+
+### 4. [gundo](https://github.com/sjl/gundo.vim)
+<leader>ud 撤销分支树，选中之前的节点，回车就可以回到之前修改或撤销的状态
+
+### 4. [DoxygenToolkit](https://github.com/vim-scripts/DoxygenToolkit.vim)
 <leader>cf 生成Doxygen风格注释  
 
 F4 进入粘贴模式，从其他地方粘贴过来的代码格式不会变化  
