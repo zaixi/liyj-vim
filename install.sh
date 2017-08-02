@@ -85,7 +85,7 @@ else
 		git clone --depth=1 http://github.com/vim/vim
 		echo --------------------编译安装vim--------------------
 		cd vim
-		./configure --with-features=huge --enable-multibyte --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-cscope --disable-gui
+		./configure --with-features=huge --enable-multibyte --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config/ --enable-rubyinterp --enable-luainterp --enable-perlinterp --enable-cscope
 		make -j4
 		sudo apt-get -y remove vim vim-runtime gvim vim-tiny vim-common vim-gui-common vim-nox
 		sudo make install
