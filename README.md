@@ -27,22 +27,22 @@ liyj-vim
     - [5. 安装VIM插件](#5.-安装VIM插件)  
     - [6. 编译YouCompleteMe自动补全插件](#6.-编译YouCompleteMe自动补全插件)  
 - [使用说明](#使用说明)  
-    - [1. git操作[fugitive](https://github.com/tpope/vim-fugitive)](#1.-git操作[fugitive](https://github.com/tpope/vim-fugitive))
-    - [2.  [tagbar](https://github.com/majutsushi/tagbar)](#2.--[tagbar](https://github.com/majutsushi/tagbar))
-    - [3. [trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)](#3.-[trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace))
-    - [4. [ctrlsf](https://github.com/dyng/ctrlsf.vim)](#4.-[ctrlsf](https://github.com/dyng/ctrlsf.vim))
-    - [5. [gtags](http://www.gnu.org/software/global)](#5.-[gtags](http://www.gnu.org/software/global))
-    - [6. [nerdcommenter](https://github.com/scrooloose/nerdcommenter)](#6.-[nerdcommenter](https://github.com/scrooloose/nerdcommenter))
-    - [7.  [asyncrun](https://github.com/skywind3000/asyncrun.vim)](#7.- [asyncrun](https://github.com/skywind3000/asyncrun.vim))
-    - [8. [nerdtree](https://github.com/scrooloose/nerdtree)](#8.-[nerdtree](https://github.com/scrooloose/nerdtree))
-    - [10. [ctrlp](https://github.com/ctrlpvim/ctrlp.vim)](#10.-[ctrlp](https://github.com/ctrlpvim/ctrlp.vim))
-    - [11. [multiple-cursors](https://github.com/terryma/vim-multiple-cursors)](#11.-[multiple-cursors](https://github.com/terryma/vim-multiple-cursors))
-    - [12. [easymotion](https://github.com/easymotion/vim-easymotion)](#12.-[easymotion](https://github.com/easymotion/vim-easymotion))
-    - [13. [gundo](https://github.com/sjl/gundo.vim)](#13.-[gundo](https://github.com/sjl/gundo.vim))
-    - [14. [DoxygenToolkit](https://github.com/vim-scripts/DoxygenToolkit.vim)](#14.-[DoxygenToolkit](https://github.com/vim-scripts/DoxygenToolkit.vim))
-    - [15. [dein](https://github.com/Shougo/dein.vim)](#15.-[dein](https://github.com/Shougo/dein.vim))
-    - [16. [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)](#16.-[YouCompleteMe](https://github.com/Valloric/YouCompleteMe))
-    - [17. 其他快捷键](#17.-其他快捷键)
+	- [1. git简化操作](#1.-git简化操作)
+	- [2.  函数浏览](#2.- 函数浏览)
+	- [3. 行尾空格](#3.-行尾空格)
+	- [4. 工程下单词搜索](#4.-工程下单词搜索)
+	- [5. 定义跳转](#5.-定义跳转)
+	- [6. 快速注释](#6.-快速注释)
+	- [7. 异步执行](#7.-异步执行)
+	- [8. 目录树](#8.-目录树)
+	- [10. ctrlp](#10.-ctrlp)
+	- [11. 多光标编辑](#11.-多光标编辑)
+	- [12. 快速移动](#12.-快速移动)
+	- [13. 撤销分支树](#13.-撤销分支树)
+	- [14. Doxygen风格注释](#14.-Doxygen风格注释)
+	- [15. 插件管理](#15.-插件管理)
+	- [16. 自动补全插件](#16.-自动补全插件)
+	- [17. 其他快捷键](#17.-其他快捷键)
 - [FAQ](#FAQ)
     - [安装依赖报错](#安装依赖报错)
     - [编译YouCompleteMe自动补全插件报错](#编译YouCompleteMe自动补全插件报错)
@@ -146,28 +146,33 @@ sudo apt-get install clang-3.9
 ```
 
 ## 使用说明
-### 1. git操作[fugitive](https://github.com/tpope/vim-fugitive)
+### 1. git简化操作
+插件来源:[fugitive](https://github.com/tpope/vim-fugitive)
 ```
 Gstatus 相当于git status  
 Gdiff 相当于git diff
 ```
 
-### 2.  [tagbar](https://github.com/majutsushi/tagbar)
+### 2.  函数浏览
+插件来源:[tagbar](https://github.com/majutsushi/tagbar)
 ```
 <leader>lt 相当于taglist  
 ```
 
-### 3. [trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)
+### 3. 行尾空格 
+插件来源:[trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)
 ```
 <leader><space> 去除行尾空格 
 ```
 
-### 4. [ctrlsf](https://github.com/dyng/ctrlsf.vim)
+### 4. 工程下单词搜索
+插件来源:[ctrlsf](https://github.com/dyng/ctrlsf.vim)
 ```
 <leader>sp 搜索光标下单词
 ```
 
-### 5. [gtags](http://www.gnu.org/software/global)
+### 5. 定义跳转
+插件来源:[gtags](http://www.gnu.org/software/global)
 ```
 ctrl + ]   跳转到光标下单词的定义
 <leader>s  查找光标下单词的引用  
@@ -176,67 +181,77 @@ ctrl + ]   跳转到光标下单词的定义
 在项目根目录运行gtags,只需要生成一次，以后w保存时更新当前tags文件
 ```
 
-### 6. [nerdcommenter](https://github.com/scrooloose/nerdcommenter)
+### 6. 快速注释
+插件来源:[nerdcommenter](https://github.com/scrooloose/nerdcommenter)
 ```
 <leader>cc 注释选中区域或当前行  
 <leader>cu 取消注释选中区域或当前行  
 ```
 
-### 7.  [asyncrun](https://github.com/skywind3000/asyncrun.vim)
+### 7. 异步执行
+插件来源:[asyncrun](https://github.com/skywind3000/asyncrun.vim)
 ```
 AsyncRun {command} 异步执行command
 eg：
   AsyncRun ls 异步列出当前文件
 ```
 
-### 8. [nerdtree](https://github.com/scrooloose/nerdtree)
+### 8. 目录树
+插件来源:[nerdtree](https://github.com/scrooloose/nerdtree)
 ```
 <leader>fl 显示文件列表 
 ```
  
- ### 9. [easy-align](https://github.com/junegunn/vim-easy-align)
+ ### 9. 快速对齐
+ 插件来源:[easy-align](https://github.com/junegunn/vim-easy-align)
  ```
 <leader>a  对齐选中区域(可根据空格，等号，引号等对齐)，vim-easy-align的功能  
 eg:<leader>a=  根据"="对齐选中区域  
 eg:<leader>a,  根据","对齐选中区域  
 ```
 
-### 10. [ctrlp](https://github.com/ctrlpvim/ctrlp.vim)
+### 10. ctrlp
+插件来源:[ctrlp](https://github.com/ctrlpvim/ctrlp.vim)
 ```
 ctrl+p 进入文件搜索模式，输入文件名可搜索文件(默认当前目录), 输入..可以把搜索目录向上移动
 ```
 
-### 11. [multiple-cursors](https://github.com/terryma/vim-multiple-cursors)
+### 11. 多光标编辑
+插件来源:[multiple-cursors](https://github.com/terryma/vim-multiple-cursors)
 ```
 ctrl+n 选中当前单词，再按ctrl+n选中下一个同样的单词，选完后按c批量修改  
 ```
 
-### 12. [easymotion](https://github.com/easymotion/vim-easymotion)
+### 12. 快速移动
+插件来源:[easymotion](https://github.com/easymotion/vim-easymotion)
 ```
-s + {任意字符}  快速移动到指定位置,vim-easymotion的功能  
+s + {任意字符}  快速移动到指定位置 
 例子：已有一行数据为  
 sudo apt-get install silversearcher-ag global  
 光标在行首，输入sia光标跳到indtall的i处  
 ```
 
-### 13. [gundo](https://github.com/sjl/gundo.vim)
+### 13. 撤销分支树
+插件来源:[gundo](https://github.com/sjl/gundo.vim)
 ```
-<leader>ud 撤销分支树，选中之前的节点，回车就可以回到之前修改或撤销的状态
+<leader>ud 选中之前的节点，回车就可以回到之前修改或撤销的状态
 ```
 
-### 14. [DoxygenToolkit](https://github.com/vim-scripts/DoxygenToolkit.vim)
+### 14. Doxygen风格注释
+插件来源:[DoxygenToolkit](https://github.com/vim-scripts/DoxygenToolkit.vim)
 ```
 <leader>cf 生成Doxygen风格注释  
 ```
 
-### 15. [dein](https://github.com/Shougo/dein.vim)
+### 15. 插件管理
+插件来源:[dein](https://github.com/Shougo/dein.vim)
 ```
 PlugInstall 安装插件
 PlugUpdata  更新插件
 ```
 
-### 16. [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
-自动补全插件
+### 16. 自动补全插件
+插件来源:[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 ctrl + space 手动触发，注意此快捷键常和系统输入法冲突
 YouCompleteMe后端采用clang编译器分析语义完成语义补全，所以需要一个配置文件告诉clang编译参数，YouCompleteMe会自动从当前目录向上级目录遍历找到.ycm_extra_conf.py配置文件，所以需要配置.ycm_extra_conf.py文件,具体配置方法见[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 对于向kernel这种的项目，进入项目根目录打开vim,执行`YcmGenerateConfig`命令可自动生成.ycm_extra_conf.py文件。
