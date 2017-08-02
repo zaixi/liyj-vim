@@ -14,6 +14,9 @@ liyj-vim
 ---------------------------------
 ---------------------------------
 
+## liyj-vim效果
+![vim效果](https://github.com/zaixi/liyj-vim/blob/master/vim.png)
+
 ## 自动安装
 **自动安装目前只支持ubuntu14和ubuntu16版本**
 ### 1. clone 到本地
