@@ -148,36 +148,36 @@ ctrl + ]   跳转到光标下单词的定义
 <leader>cu 取消注释选中区域或当前行  
 ```
 
-### 2.  [asyncrun](https://github.com/skywind3000/asyncrun.vim)
+### 7.  [asyncrun](https://github.com/skywind3000/asyncrun.vim)
 ```
 AsyncRun {command} 异步执行command
 eg：
   AsyncRun ls 异步列出当前文件
 ```
 
-### 4. [nerdtree](https://github.com/scrooloose/nerdtree)
+### 8. [nerdtree](https://github.com/scrooloose/nerdtree)
 ```
 <leader>fl 显示文件列表 
 ```
  
- ### 4. [easy-align](https://github.com/junegunn/vim-easy-align)
+ ### 9. [easy-align](https://github.com/junegunn/vim-easy-align)
  ```
 <leader>a  对齐选中区域(可根据空格，等号，引号等对齐)，vim-easy-align的功能  
 eg:<leader>a=  根据"="对齐选中区域  
 eg:<leader>a,  根据","对齐选中区域  
 ```
 
-### 4. [ctrlp](https://github.com/ctrlpvim/ctrlp.vim)
+### 10. [ctrlp](https://github.com/ctrlpvim/ctrlp.vim)
 ```
 ctrl+p 进入文件搜索模式，输入文件名可搜索文件(默认当前目录), 输入..可以把搜索目录向上移动
 ```
 
-### 4. [multiple-cursors](https://github.com/terryma/vim-multiple-cursors)
+### 11. [multiple-cursors](https://github.com/terryma/vim-multiple-cursors)
 ```
 ctrl+n 选中当前单词，再按ctrl+n选中下一个同样的单词，选完后按c批量修改  
 ```
 
-### 4. [easymotion](https://github.com/easymotion/vim-easymotion)
+### 12. [easymotion](https://github.com/easymotion/vim-easymotion)
 ```
 s + {任意字符}  快速移动到指定位置,vim-easymotion的功能  
 例子：已有一行数据为  
@@ -185,32 +185,46 @@ sudo apt-get install silversearcher-ag global
 光标在行首，输入sia光标跳到indtall的i处  
 ```
 
-### 4. [gundo](https://github.com/sjl/gundo.vim)
+### 13. [gundo](https://github.com/sjl/gundo.vim)
 ```
 <leader>ud 撤销分支树，选中之前的节点，回车就可以回到之前修改或撤销的状态
 ```
 
-### 4. [DoxygenToolkit](https://github.com/vim-scripts/DoxygenToolkit.vim)
+### 14. [DoxygenToolkit](https://github.com/vim-scripts/DoxygenToolkit.vim)
 ```
 <leader>cf 生成Doxygen风格注释  
 ```
 
-### 4. [dein](https://github.com/Shougo/dein.vim)
+### 15. [dein](https://github.com/Shougo/dein.vim)
 ```
 PlugInstall 安装插件
 PlugUpdata  更新插件
 ```
 
-### 4. [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
+### 16. [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 自动补全插件
 ctrl + space 手动触发，注意此快捷键常和系统输入法冲突
+YouCompleteMe后端采用clang编译器分析语义完成语义补全，所以需要一个配置文件告诉clang编译参数，YouCompleteMe会自动从当前目录向上级目录遍历找到.ycm_extra_conf.py配置文件，所以需要配置.ycm_extra_conf.py文件,具体配置方法见[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
+对于向kernel这种的项目，进入项目根目录打开vim,执行`YcmGenerateConfig`命令可自动生成.ycm_extra_conf.py文件。
 ![补全效果](http://i.imgur.com/0OP4ood.gif)
 
-### 其他快捷键
+### 17. 其他快捷键
+```
 F4 进入粘贴模式，从其他地方粘贴过来的代码格式不会变化  
 F5 在当前目录下异步执行make  
-F11 全屏切换  
-F12 对齐当前文件  
+F9 打开/关闭行号显示，方便鼠标复制
+F11 全屏切换
+F12 对齐当前文件
+<leader> R 不确认、非整词替换当前光标下单词
+<Leader>rw 不确认、整词替换当前光标下单词
+<Leader>rc 确认、非整词替换当前光标下单词
+<Leader>cw 或 <Leader>wc 确认、整词替换当前光标下单词
+<leader> 1
+<leader> 2
+...
+airline插件提供，当打开多个文件时，在buffer间切换
+```
+
 
 
 ## FAQ
