@@ -19,7 +19,7 @@ liyj-vim
 - [自动安装](#自动安装)  
     - [1. clone 到本地](#1.-clone-到本地)  
     - [2. 安装](#2.-安装)  
-    - [3. 安装powerline字体](#3.-安装powerline字体) 
+    - [3. 安装powerline字体](#3.-安装powerline字体)  
     - [4. 编译YouCompleteMe](#4.-编译YouCompleteMe)  
 - [手动安装步骤](#手动安装步骤)  
     - [1. 安装依赖包](#1.-安装依赖包)   
