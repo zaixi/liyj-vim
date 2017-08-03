@@ -104,7 +104,6 @@ sudo make install
 ```
 
 ### 3. 安装powerline字体
-```
 git clone https://github.com/powerline/fonts.git
 cd fonts
 ./install.sh
@@ -209,7 +208,7 @@ eg：
 ```
 
 ### 9. 快速对齐
- 插件来源:[easy-align](https://github.com/junegunn/vim-easy-align)
+插件来源:[easy-align](https://github.com/junegunn/vim-easy-align)
 ```
 <leader>a  对齐选中区域(可根据空格，等号，引号等对齐)，vim-easy-align的功能
 eg:<leader>a=  根据"="对齐选中区域
@@ -306,9 +305,3 @@ wget -O ~/YouCompleteMe.tar.gz "http://ohpunyak1.bkt.clouddn.com/YouCompleteMe.t
 cd ~/.vim/plug/repos/github.com/Valloric
 tar -zxf ~/YouCompleteMe.tar.gz
  ```
-
-
-
-
-
-
