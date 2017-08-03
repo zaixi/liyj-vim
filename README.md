@@ -303,6 +303,3 @@ wget -O ~/YouCompleteMe.tar.gz "http://ohpunyak1.bkt.clouddn.com/YouCompleteMe.t
 cd ~/.vim/plug/repos/github.com/Valloric
 tar -zxf ~/YouCompleteMe.tar.gz
  ```
-
-
-
