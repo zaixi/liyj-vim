@@ -19,6 +19,8 @@ liyj-vim
 - [自动安装](#自动安装)  
     - [1. clone 到本地](#1.-clone-到本地)  
     - [2. 安装](#2.-安装)  
+    - [3. 安装powerline字体](#3. 安装powerline字体) 
+    - [4. 编译YouCompleteMe](#4. 编译YouCompleteMe)  
 - [手动安装步骤](#手动安装步骤)  
     - [1. 安装依赖包](#1.-安装依赖包)   
     - [2. 源代码安装VIM8](#2.-源代码安装VIM8)  
@@ -66,13 +68,17 @@ cd liyj-vim
 ./install.sh  /* 安装依赖和8.0版本VIM以及VIM插件 */
 ```
 然后等待自动安装完成，安装完成后退出vim
-安装vim-airline字体  
-* 选择字体
+
+### 3. 安装powerline字体  
 终端单击右键，配置文件，配置文件首选项，自定义字体打勾，选择字体   
-推荐   
-droid sans mono for powerline regular  
+推荐字体(带powerline的字体)
+```
+droid sans mono for powerline regular  
 Cousine Powerline  
 Inconsolata-dz   
+```
+
+### 4. 编译YouCompleteMe
 ```
 ./install.sh /* 编译YouCompleteMe自动补全插件 */
 ```
