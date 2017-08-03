@@ -1,6 +1,7 @@
 liyj-vim
 =======================
-
+[![Gitter Room](https://img.shields.io/gitter/room/zaixi/liyj-vim.svg)](https://gitter.im/zaixi/liyj-vim)
+[![Build Status](https://travis-ci.org/zaixi/liyj-vim.svg?branch=master)](https://travis-ci.org/zaixi/liyj-vim)
 
 > VERSION: 1.0
 
