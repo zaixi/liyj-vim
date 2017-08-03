@@ -68,12 +68,12 @@ cd liyj-vim
 ```
 然后等待自动安装完成，安装完成后退出vim
 
-### 3. 安装powerline字体  
+### 3. 安装powerline字体
 终端单击右键，配置文件，配置文件首选项，自定义字体打勾，选择字体   
 推荐字体(带powerline的字体)
 ```
 droid sans mono for powerline regular  
-Cousine Powerline  
+Cousine Powerline
 Inconsolata-dz   
 ```
 
@@ -103,7 +103,7 @@ make -j4
 sudo make install
 ```
 
-### 3. 安装vim-airline字体  
+### 3. 安装vim-airline字体
 ```
 git clone https://github.com/powerline/fonts.git
 cd fonts
@@ -112,9 +112,9 @@ cd ..
 ```
 * 选择字体
 终端单击右键，配置文件，配置文件首选项，自定义字体打勾，选择字体   
-推荐   
-droid sans mono for powerline regular  
-Cousine Powerline  
+推荐
+droid sans mono for powerline regular
+Cousine Powerline
 Inconsolata-dz   
 
 ### 4. clone liyj-vim到本地
@@ -161,13 +161,13 @@ Gdiff 相当于git diff
 ### 2.  函数浏览
 插件来源:[tagbar](https://github.com/majutsushi/tagbar)
 ```
-<leader>lt 相当于taglist  
+<leader>lt 相当于taglist
 ```
 
-### 3. 行尾空格 
+### 3. 行尾空格
 插件来源:[trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)
 ```
-<leader><space> 去除行尾空格 
+<leader><space> 去除行尾空格
 ```
 
 ### 4. 工程下单词搜索
@@ -189,8 +189,8 @@ ctrl + ]   跳转到光标下单词的定义
 ### 6. 快速注释
 插件来源:[nerdcommenter](https://github.com/scrooloose/nerdcommenter)
 ```
-<leader>cc 注释选中区域或当前行  
-<leader>cu 取消注释选中区域或当前行  
+<leader>cc 注释选中区域或当前行
+<leader>cu 取消注释选中区域或当前行
 ```
 
 ### 7. 异步执行
@@ -204,15 +204,15 @@ eg：
 ### 8. 目录树
 插件来源:[nerdtree](https://github.com/scrooloose/nerdtree)
 ```
-<leader>fl 显示文件列表 
+<leader>fl 显示文件列表
 ```
- 
+
  ### 9. 快速对齐
  插件来源:[easy-align](https://github.com/junegunn/vim-easy-align)
  ```
-<leader>a  对齐选中区域(可根据空格，等号，引号等对齐)，vim-easy-align的功能  
-eg:<leader>a=  根据"="对齐选中区域  
-eg:<leader>a,  根据","对齐选中区域  
+<leader>a  对齐选中区域(可根据空格，等号，引号等对齐)，vim-easy-align的功能
+eg:<leader>a=  根据"="对齐选中区域
+eg:<leader>a,  根据","对齐选中区域
 ```
 
 ### 10. ctrlp
@@ -230,10 +230,10 @@ ctrl+n 选中当前单词，再按ctrl+n选中下一个同样的单词，选完�
 ### 12. 快速移动
 插件来源:[easymotion](https://github.com/easymotion/vim-easymotion)
 ```
-s + {任意字符}  快速移动到指定位置 
-例子：已有一行数据为  
-sudo apt-get install silversearcher-ag global  
-光标在行首，输入sia光标跳到indtall的i处  
+s + {任意字符}  快速移动到指定位置
+例子：已有一行数据为
+sudo apt-get install silversearcher-ag global
+光标在行首，输入sia光标跳到indtall的i处
 ```
 
 ### 13. 撤销分支树
@@ -245,7 +245,7 @@ sudo apt-get install silversearcher-ag global
 ### 14. Doxygen风格注释
 插件来源:[DoxygenToolkit](https://github.com/vim-scripts/DoxygenToolkit.vim)
 ```
-<leader>cf 生成Doxygen风格注释  
+<leader>cf 生成Doxygen风格注释
 ```
 
 ### 15. 插件管理
@@ -297,7 +297,7 @@ sudo cd /usr/bin
 sudo ln -s /usr/bin/g++-4.9 /usr/bin/g++ -f
 sudo ln -s /usr/bin/gcc-4.9 /usr/bin/gcc -f
 ```
-  
+
  ### 下载VIM插件很慢，或者YouCompleteMe下载失败，总是提示重新安装
  插件来源于github，和网速有很大关系，可以采用其他下载方式，再手动放到相应目录
  ```
