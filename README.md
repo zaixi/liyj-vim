@@ -150,6 +150,9 @@ sudo apt-get install clang-3.9
 ```
 
 ## 使用说明
+```
+注意, 以下 ; 代表 <leader>
+```
 ### 1. git简化操作
 插件来源:[fugitive](https://github.com/tpope/vim-fugitive)
 ```
@@ -304,6 +307,3 @@ wget -O ~/YouCompleteMe.tar.gz "http://ohpunyak1.bkt.clouddn.com/YouCompleteMe.t
 cd ~/.vim/plug/repos/github.com/Valloric
 tar -zxf ~/YouCompleteMe.tar.gz
  ```
-
-
-
