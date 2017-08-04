@@ -92,7 +92,7 @@ sudo apt-get install global                                   �
 sudo apt-get install aptitude libncurses5-dev ruby-dev lua5.1 lua5.1-dev libperl-dev #编译VIM依赖库
 ```
 
-### 源代码安装VIM8
+### 源代码安装vim8
 ```
 sudo apt-get remove vim vim-runtime gvim vim-tiny vim-common vim-gui-common vim-nox #卸载原有的VIM
 git clone --depth=1 http://github.com/vim/vim
@@ -153,26 +153,26 @@ sudo apt-get install clang-3.9
 ```
 注意, 以下 ; 代表 <leader>
 ```
-### 1. git简化操作
+### git简化操作
 插件来源:[fugitive](https://github.com/tpope/vim-fugitive)
 ```
 Gstatus 相当于git status  
 Gdiff 相当于git diff
 ```
 
-### 2. 函数浏览
+### 2.函数浏览
 插件来源:[tagbar](https://github.com/majutsushi/tagbar)
 ```
 <leader>lt 相当于taglist
 ```
 
-### 3. 行尾空格
+### 3 行尾空格
 插件来源:[trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)
 ```
 <leader><space> 去除行尾空格
 ```
 
-### 4. 工程下单词搜索
+### 4工程下单词搜索
 插件来源:[ctrlsf](https://github.com/dyng/ctrlsf.vim)
 ```
 <leader>sp 搜索光标下单词
