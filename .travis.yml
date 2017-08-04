@@ -1,14 +1,7 @@
 language: generic
-language: generic
 os:
   - linux
-sudo: false
+sudo: ture
 
 script:
     ./install.sh
-    ./install.sh
-matrix:
-  fast_finish: true
-
-notifications:
-    on_success: never
