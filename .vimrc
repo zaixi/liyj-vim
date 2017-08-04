@@ -217,6 +217,9 @@ if dein#load_state('$HOME/.vim/plug/')
 				\'on_event': 'CursorHold'})							" 多行编辑
 	call dein#add('vim-scripts/a.vim',{
 				\'on_cmd': 'A'})									" .h和.c切换
+	call dein#add('iamcco/markdown-preview.vim') ",{
+				"\'merged': 0,
+				"\'on_cmd': 'MarkdownPreview'})						"markdown预览
 
 	call dein#add('scrooloose/nerdcommenter',{
 				\'on_map': [';cc',';cu']})							" 快速注释
@@ -236,6 +239,8 @@ if dein#load_state('$HOME/.vim/plug/')
 	call dein#add('vim-airline/vim-airline-themes',{
 				\'on_event': 'CursorHold'})							" 状态栏主题
 
+	call dein#add('lilydjwg/fcitx.vim',{
+				\'on_cmd' : 'InsertEnter'})						" 输入法状态保存
 	call dein#add('rdnetto/YCM-Generator',{
 				\'on_cmd' : ['InsertEnter']}) 						" 自动生成超级补全配置
 	call dein#add('w0rp/ale',{
@@ -581,7 +586,7 @@ cs add GTAGS
 let GtagsCscope_Auto_Load = 1
 let CtagsCscope_Auto_Map = 1
 let GtagsCscope_Quiet = 1
-au BufWritePost exec GenGTAGS
+au BufWritePost call UpdateGtags(expand('<afile>'))
 "}}}
 
 " tab 相关{{{
