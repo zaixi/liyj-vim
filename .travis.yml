@@ -1,9 +1,12 @@
-language: php
-php:
-  - 5.3
+language: generic
+language: generic
+os:
+  - linux
+sudo: false
 
 script:
-  - ls
+    ./install.sh
+    ./install.sh
 matrix:
   fast_finish: true
 
