@@ -1,0 +1,11 @@
+language: php
+php:
+  - 5.3
+
+script:
+  - ls
+matrix:
+  fast_finish: true
+
+notifications:
+    on_success: never
