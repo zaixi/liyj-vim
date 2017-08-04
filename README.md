@@ -118,7 +118,6 @@ Inconsolata-dz   
 ```
 
 ### 4. clone liyj-vim到本地
-
 ```
 git clone https://github.com/zaixi/liyj-vim
 cd liyj-vim
