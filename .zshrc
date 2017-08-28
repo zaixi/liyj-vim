@@ -102,3 +102,5 @@ done
 
 FINISH="%{$terminfo[sgr0]%}"
 PROMPT=$(echo "$CYAN%n@$BLUE%m:$GREEN%2/%(!.#.)$_YELLOW>$FINISH ")
+
+alias vi='vim'
