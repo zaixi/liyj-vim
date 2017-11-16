@@ -74,10 +74,10 @@ set foldmethod=marker                               " 利用标记折叠
 
 " 文本格式和排版:{{{
 "
-set tabstop=4						" Tab键的宽度
+set tabstop=4						" 编辑时制表符占用空格数
 "set softtabstop=4                   " 逢４个空格进１个制表符
 "set expandtab                       " 将tab转换为空格
-set shiftwidth=4                    " 缩进的空格数
+set shiftwidth=4                    " 格式化时制表符占用空格数
 set autoindent                      " 新行自动缩进
 set cindent                         " 使用ｃ语言缩进格式
 set formatoptions=tcqlron         " 自动格式化
@@ -99,6 +99,15 @@ set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936 "编码设置
 " 打开文件时自动识别编码，fileencoding就为辨认的值
 set langmenu=zh_CN.UTF-8
 set helplang=cn                     " 帮助系统设置为中文
+" quickfix 乱码
+function! QfMakeConv()
+	let qflist = getqflist()
+	for i in qflist
+		let i.text = iconv(i.text, "cp936", "utf-8")
+	endfor
+	call setqflist(qflist)
+endfunction
+au QuickfixCmdPost make call QfMakeConv()
 "}}}
 
 " 其他:{{{
@@ -134,7 +143,7 @@ nmap <C-E> :b#<CR>
 " 使shift-insert快捷键像在 Xterm程序中一样工作
 map <S-Insert> <MiddleMouse>
 " 鼠标中键代表快捷粘贴
-map! <S-Insert> <MiddleMouse>
+"map! <S-Insert> <MiddleMouse>
 "nmap <leader>n :cn<CR>
 "nmap <leader>p :cp<CR>
 "全文缩进
@@ -155,6 +164,9 @@ nnoremap <leader>p "+p
 " 去掉搜索高亮
 noremap <silent><leader>/ :nohls<CR>
 nnoremap <F10> :set number!<CR>
+" 切换前后buffer
+nnoremap [b :bprevious<cr>
+nnoremap ]b :bnext<cr>
 " 粘贴模式{{{
 set pastetoggle=<F4>            "    when in insert mode, press <F4> to go to
 au InsertLeave * set nopaste
@@ -167,7 +179,7 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 "}}}
 "}}}
 
-" bundle:{{{
+" plug:{{{
 set nocompatible              " 去除VI一致性,必须
 "filetype off                  " 必须
 
@@ -226,6 +238,8 @@ if dein#load_state('$HOME/.vim/plug/')
 	call dein#add('junegunn/vim-easy-align',{
 				\'on_map': '<Plug>(EasyAlign)'})					" 快速对齐
 
+	call dein#add('rdnetto/YCM-Generator',{
+				\'on_event' : 'CursorHold'}) 						" 自动生成超级补全配置
 	call dein#add('easymotion/vim-easymotion',{
 				\'on_event': 'CursorHold'})							" 快速移动
 	call dein#add('luochen1990/rainbow',{
@@ -239,15 +253,18 @@ if dein#load_state('$HOME/.vim/plug/')
 	call dein#add('vim-airline/vim-airline-themes',{
 				\'on_event': 'CursorHold'})							" 状态栏主题
 
+	call dein#add('jsfaint/gen_tags.vim',{
+				\'merged': 0,
+				\'on_event': 'BufWritePost'})						" gnu global更新
+
 	call dein#add('lilydjwg/fcitx.vim',{
-				\'on_cmd' : 'InsertEnter'})						" 输入法状态保存
-	call dein#add('rdnetto/YCM-Generator',{
-				\'on_cmd' : ['InsertEnter']}) 						" 自动生成超级补全配置
+				\'on_event' : 'InsertEnter'})						" 输入法状态保存
 	call dein#add('w0rp/ale',{
-                 \'on_event': 'InsertEnter'}) 						" 异步语法检查
+				 \'on_event': 'InsertEnter'}) 						" 异步语法检查
 	call dein#add('jiangmiao/auto-pairs',{
 				\'on_event': 'InsertEnter'})						" 结对符补全
 	call dein#add('honza/vim-snippets',{
+				\'merged': 0,
 				\'on_event': 'InsertEnter'})						" 模版补全语法文件
 	call dein#add('SirVer/ultisnips',{
 				\'on_event': 'InsertEnter'})						" 模版补全
@@ -326,9 +343,9 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 " color:{{{
 set t_Co=256
 let g:rehash256 = 1
+set background=dark
 colorscheme molokai
-"set background=dark
-"colorscheme solarized                         " 配色
+colorscheme solarized                         " 配色
 "set termguicolors desert256
 "colorscheme darkmate
 "colorscheme desert256
@@ -339,9 +356,9 @@ colorscheme molokai
 "}}}
 
 " 模版补全：{{{
-let g:UltiSnipsSnippetDirectories=["mysnippets"]
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 let g:UltiSnipsExpandTrigger ="<leader><tab>"
-let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+let g:UltiSnipsJumpForwardTrigger = '<CR>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 "}}}
 
@@ -412,7 +429,7 @@ inoremap <leader>; <C-x><C-o>
 " 补全内容不以分割子窗口形式出现，只显示补全列表
 " set completeopt-=preview
 " 从第一个键入字符就开始罗列匹配项
-let g:ycm_min_num_of_chars_for_completion=2
+let g:ycm_min_num_of_chars_for_completion=1
 " 禁止缓存匹配项，每次都重新生成匹配项
 let g:ycm_cache_omnifunc=0
 " 语法关键字补全
@@ -563,11 +580,6 @@ noremap <F9> :call asyncrun#quickfix_toggle(8)<cr>
 map <F5> :AsyncRun make<CR>
 let g:asyncrun_encs = 'gbk'
 "}}}
-" 去除行尾空格
-nnoremap <leader><space> :FixWhitespace<cr>
-" 调用 gundo 树
-nnoremap <Leader>ud :GundoToggle<CR>
-"}}}
 
 " global {{{
 "s:查找函数名、宏、枚举值等出现的地方
@@ -589,18 +601,32 @@ let GtagsCscope_Quiet = 1
 au BufWritePost call UpdateGtags(expand('<afile>'))
 "}}}
 
-" tab 相关{{{
-" 切换前后buffer
-nnoremap [b :bprevious<cr>
-nnoremap ]b :bnext<cr>
-
-" 新建tab  Ctrl+t
-" <C-t>     :tabnew<CR>
-"inoremap <C-t>     <Esc>:tabnew<CR>
+" 去除行尾空格
+nnoremap <leader><space> :FixWhitespace<cr>
+" 调用 gundo 树
+nnoremap <Leader>ud :GundoToggle<CR>
 "}}}
 
-set regexpengine=1
-"set vbs=4
-"set ttyfast
-"folding=manual
-set clipboard=exclude:.*
+" 公司强制格式{{{
+set fencs=utf-8,cp936
+function! KRIndent()
+    let c_space_errors = 0
+    set fileformats=unix
+    set textwidth=120
+    set noexpandtab
+    set shiftround
+    set cindent
+    set formatoptions=tcqlron
+    set cinoptions=:0,l1,t0,g0
+    syntax keyword cType u8 u16 u32 u64 s8 s16 s32 s64 off64_t
+    highlight default link LinuxError ErrorMsg
+
+    syntax match LinuxError / \+\ze\t/     " spaces before tab
+    syntax match LinuxError /\s\+$/        " trailing whitespaces
+    "syntax match LinuxError /\%121v.\+/    " virtual column 121 and more
+    "autocmd BufWrite <buffer> :%s/\s\+$//e " 文件保存时，自动删除行尾空格
+endfunction
+if has("autocmd")
+    autocmd FileType c,cpp,h,hh call KRIndent()
+endif
+" }}}

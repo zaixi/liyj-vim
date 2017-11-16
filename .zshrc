@@ -10,9 +10,10 @@ export ZSH=$HOME/.oh-my-zsh
 #ZSH_THEME="af-magic"
 
 
-#ZSH_THEME="mh"
-#ZSH_THEME="gnzh"
+ZSH_THEME="gnzh"
+ZSH_THEME="mh"
 ZSH_THEME="ys"
+ZSH_THEME="agnoster"
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -94,13 +95,33 @@ source $ZSH/oh-my-zsh.sh
 #autoload colors
 #colors
 
-for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
-	eval _$color='%{$terminfo[bold]$fg[${(L)color}]%}'
-	eval $color='%{$fg[${(L)color}]%}'
-	(( count = $count + 1 ))
-done
+#for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
+	#eval _$color='%{$terminfo[bold]$fg[${(L)color}]%}'
+	#eval $color='%{$fg[${(L)color}]%}'
+	#(( count = $count + 1 ))
+#done
 
-FINISH="%{$terminfo[sgr0]%}"
-PROMPT=$(echo "$CYAN%n@$BLUE%m:$GREEN%2/%(!.#.)$_YELLOW>$FINISH ")
+#FINISH="%{$terminfo[sgr0]%}"
+#PROMPT=$(echo "$CYAN%n@$BLUE%m:$GREEN%2/%(!.#.)$_YELLOW>$FINISH ")
 
+alias f='find -name'
 alias vi='vim'
+alias minicom='sudo minicom -w'
+#export TERM=xterm-256color
+export SHELL="zsh"
+export LESSCHARSET=utf-8
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+export PATH=$PATH:/opt/gxtools/arm-eabi/bin:/opt/gxtools/arm-linux/bin:/opt/gxtools/arm-elf/bin
+export PATH=$PATH:/opt/gxtools/csky-elf/bin:/opt/gxtools/csky-linux/bin:/opt/gxtools/csky-abiv2-elf/bin:/opt/gxtools/jlink:/opt/gxtools//gdb-7.11/bin/
+
+
