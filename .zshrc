@@ -1,95 +1,178 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Antigen: https://github.com/zsh-users/antigen
+ANTIGEN="$HOME/.local/bin/antigen.zsh"
 
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# Install antigen.zsh if not exist
+if [ ! -f "$ANTIGEN" ]; then
+	echo "Installing antigen ..."
+	[ ! -d "$HOME/.local" ] && mkdir -p "$HOME/.local" 2> /dev/null
+	[ ! -d "$HOME/.local/bin" ] && mkdir -p "$HOME/.local/bin" 2> /dev/null
+	[ ! -f "$HOME/.z" ] && touch "$HOME/.z"
+	URL="http://git.io/antigen"
+	TMPFILE="/tmp/antigen.zsh"
+	if [ -x "$(which curl)" ]; then
+		curl -L "$URL" -o "$TMPFILE"
+	elif [ -x "$(which wget)" ]; then
+		wget "$URL" -O "$TMPFILE"
+	else
+		echo "ERROR: please install curl or wget before installation !!"
+		exit
+	fi
+	if [ ! $? -eq 0 ]; then
+		echo ""
+		echo "ERROR: downloading antigen.zsh ($URL) failed !!"
+		exit
+	fi;
+	echo "move $TMPFILE to $ANTIGEN"
+	mv "$TMPFILE" "$ANTIGEN"
+fi
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="af-magic"
+
+# Initialize command prompt
+export PS1="%n@%m:%~%# "
+
+# Enable 256 color to make auto-suggestions look nice
+export TERM="xterm-256color"
 
 
-ZSH_THEME="gnzh"
-ZSH_THEME="mh"
-ZSH_THEME="ys"
-ZSH_THEME="agnoster"
+# Load local bash/zsh compatible settings
+_INIT_SH_NOFUN=1
+[ -f "$HOME/.local/etc/init.sh" ] && source "$HOME/.local/etc/init.sh"
+
+# exit for non-interactive shell
+[[ $- != *i* ]] && return
+
+# WSL (aka Bash for Windows) doesn't work well with BG_NICE
+[ -d "/mnt/c" ] && [[ "$(uname -a)" == *Microsoft* ]] && unsetopt BG_NICE
 
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# Initialize antigen
+source "$ANTIGEN"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Initialize oh-my-zsh
+antigen use oh-my-zsh
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# default bundles
+# visit https://github.com/unixorn/awesome-zsh-plugins
+#antigen bundle git
+antigen bundles <<EOBUNDLES
+colorize
+autojump
+thefuck
+colored-man-pages
+last-working-dir
+extract
+repo
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+rupa/z z.sh
+zsh-users/zsh-autosuggestions
+bundle zsh-users/zsh-completions
+unixorn/autoupdate-antigen.zshplugin
+EOBUNDLES
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# uncomment the line below to enable theme
+# antigen theme fishy
+antigen theme agnoster
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+# check login shell
+if [[ -o login ]]; then
+	[ -f "$HOME/.local/etc/login.sh" ] && source "$HOME/.local/etc/login.sh"
+	[ -f "$HOME/.local/etc/login.zsh" ] && source "$HOME/.local/etc/login.zsh"
+fi
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+# syntax color definition
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+typeset -A ZSH_HIGHLIGHT_STYLES
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+# ZSH_HIGHLIGHT_STYLES[command]=fg=white,bold
+# ZSH_HIGHLIGHT_STYLES[alias]='fg=magenta,bold'
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git autojump zsh-autosuggestions osx last-working-dir)
+ZSH_HIGHLIGHT_STYLES[default]=none
+ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=009
+ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=009,standout
+ZSH_HIGHLIGHT_STYLES[alias]=fg=cyan,bold
+ZSH_HIGHLIGHT_STYLES[builtin]=fg=cyan,bold
+ZSH_HIGHLIGHT_STYLES[function]=fg=cyan,bold
+ZSH_HIGHLIGHT_STYLES[command]=fg=white,bold
+ZSH_HIGHLIGHT_STYLES[precommand]=fg=white,underline
+ZSH_HIGHLIGHT_STYLES[commandseparator]=none
+ZSH_HIGHLIGHT_STYLES[hashed-command]=fg=009
+ZSH_HIGHLIGHT_STYLES[path]=fg=214,underline
+ZSH_HIGHLIGHT_STYLES[globbing]=fg=063
+ZSH_HIGHLIGHT_STYLES[history-expansion]=fg=white,underline
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=none
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=none
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=none
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=063
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=063
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=009
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=009
+ZSH_HIGHLIGHT_STYLES[assign]=none
 
-source $ZSH/oh-my-zsh.sh
+# load local config
+[ -f "$HOME/.local/etc/config.zsh" ] && source "$HOME/.local/etc/config.zsh"
+[ -f "$HOME/.local/etc/local.zsh" ] && source "$HOME/.local/etc/local.zsh"
 
-# User configuration
+# enable syntax highlighting
+antigen bundle zsh-users/zsh-syntax-highlighting
 
-# export MANPATH="/usr/local/man:$MANPATH"
+antigen apply
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# setup for deer
+autoload -U deer
+zle -N deer
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# default keymap
+bindkey -s '\ee' 'vim\n'
+bindkey '\eh' backward-char
+bindkey '\el' forward-char
+bindkey '\ej' down-line-or-history
+bindkey '\ek' up-line-or-history
+# bindkey '\eu' undo
+bindkey '\eH' backward-word
+bindkey '\eL' forward-word
+bindkey '\eJ' beginning-of-line
+bindkey '\eK' end-of-line
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+bindkey -s '\eo' 'cd ..\n'
+bindkey -s ';;' 'ls\n'
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+bindkey '\e[1;3D' backward-word
+bindkey '\e[1;3C' forward-word
+bindkey '\e[1;3A' beginning-of-line
+bindkey '\e[1;3B' end-of-line
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+bindkey '\ev' deer
+
+alias ll='ls -l'
+
+
+# options
+unsetopt correct_all
+
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY # Don't execute immediately upon history expansion.
+
+
+# source function.sh if it exists
+[ -f "$HOME/.local/etc/function.sh" ] && . "$HOME/.local/etc/function.sh"
+
+
+# ignore complition
+zstyle ':completion:*:complete:-command-:*:*' ignored-patterns '*.pdf|*.exe|*.dll'
+zstyle ':completion:*:*sh:*:' tag-order files
+
 
 # 命令提示符
 #autoload colors
@@ -106,7 +189,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias f='find -name'
 alias vi='vim'
-alias minicom='sudo minicom -w'
+alias minicom='minicom -w'
 #export TERM=xterm-256color
 export SHELL="zsh"
 export LESSCHARSET=utf-8
@@ -121,7 +204,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+#alias pdf2htmlEX='docker run -ti --rm -v `pwd`:/pdf bwits/pdf2htmlex --zoom 1.5 pdf2htmlEX'
+export PATH=$PATH:~/work/intelFPGA/17.1/quartus/bin
 export PATH=$PATH:/opt/gxtools/arm-eabi/bin:/opt/gxtools/arm-linux/bin:/opt/gxtools/arm-elf/bin
 export PATH=$PATH:/opt/gxtools/csky-elf/bin:/opt/gxtools/csky-linux/bin:/opt/gxtools/csky-abiv2-elf/bin:/opt/gxtools/jlink:/opt/gxtools//gdb-7.11/bin/
 
-
+export FORCE_UNSAFE_CONFIGURE=1
