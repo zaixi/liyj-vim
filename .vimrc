@@ -1,5 +1,9 @@
 " Vim config file.
 
+" molokai solarized onedark desert256 darkmate zenburn
+"Tomorrow-Night Tomorrow-Night-Bright
+let g:term_colorscheme = 'solarized'
+
 " 非Plugin设置: {{{
 
 let mapleader=";"                   " 定义快捷键的前缀，即<Leader>
@@ -33,7 +37,8 @@ set cuc								" 高亮光标所在列
 set cul                             " 高亮光标所在行
 set number							" 显示行号
 set laststatus=2					" 显示状态栏 (默认值为 1, 无法显示状态栏)
-set updatetime=10
+set updatetime=1000
+set ttyfast
 "}}}
 
 " write:{{{
@@ -61,7 +66,7 @@ set hlsearch                        " 高亮搜索结果
 " 语法和补全:{{{
 "
 set wildignore=.svn,.git,*.swp,*.bak,*~,*.o,*.a     "自动补全忽略这些文件扩展名
-set completeopt=preview,menu,longest		" 代码补全
+set completeopt=menu,menuone                        " 补全列表的出现方式
 set pumheight=10                                    " 自动补全的高度
 set foldenable                                      " 开始折叠
 set foldmethod=marker                               " 利用标记折叠
@@ -201,7 +206,14 @@ set runtimepath+=$HOME/.vim/plug/repos/github.com/Shougo/dein.vim
 if dein#load_state('$HOME/.vim/plug/')
 	call dein#begin('$HOME/.vim/plug')
 
-	call dein#add('itchyny/lightline.vim')							" 状态栏优化
+	call dein#add('yianwillis/vimcdoc')							    " 中文文档
+	call dein#add('wakatime/vim-wakatime')							" 时间统计
+	call dein#add('joshdick/onedark.vim')							" atom主题
+	call dein#add('bling/vim-airline')							    " 状态栏优化
+	call dein#add('vim-airline/vim-airline-themes')                 " 状态栏主题
+	call dein#add('sheerun/vim-polyglot')                           " 语法高亮包
+	call dein#add('mbbill/undotree')								" 撤销树
+	call dein#add('Yggdroot/LeaderF')								" tarbar
 
 	call dein#add('Shougo/dein.vim',{
 				\'on_cmd' : 'PlugInstall'})							" vim插件管理器
@@ -248,10 +260,6 @@ if dein#load_state('$HOME/.vim/plug/')
 				\'on_event': 'CursorHold'})							" 去除尾随空格
 	call dein#add('aceofall/gtags.vim',{
 				\'on_event': 'CursorHold'})							" gnu global
-	call dein#add('bling/vim-airline',{
-				\'on_event': 'CursorHold'})							" 状态栏优化
-	call dein#add('vim-airline/vim-airline-themes',{
-				\'on_event': 'CursorHold'})							" 状态栏主题
 
 	call dein#add('jsfaint/gen_tags.vim',{
 				\'merged': 0,
@@ -344,22 +352,34 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 set t_Co=256
 let g:rehash256 = 1
 set background=dark
-colorscheme molokai
-colorscheme solarized                         " 配色
-"set termguicolors desert256
-"colorscheme darkmate
-"colorscheme desert256
-"colorscheme zenburn
-"colorscheme Tomorrow-Night-Bright
-"colorscheme Tomorrow-Night
-"colorscheme Tomorrow-Night-Eighties
+exec 'colorscheme ' . g:term_colorscheme
+
+if colors_name == "onedark"
+	let g:airline_theme='onedark'
+	if (empty($TMUX))
+	  if (has("nvim"))
+	  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+	  endif
+	  if (has("termguicolors"))
+		set termguicolors
+	  endif
+	endif
+endif
 "}}}
 
 " 模版补全：{{{
-let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-let g:UltiSnipsExpandTrigger ="<leader><tab>"
-let g:UltiSnipsJumpForwardTrigger = '<CR>'
-let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+" UltiSnips 按回车展开
+function! <SID>ExpandSnippetOrReturn()
+  if pumvisible() && has_key(v:completed_item, 'menu') && v:completed_item.menu =~# '^<snip>'
+    let snippet = UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+      return snippet
+    endif
+  endif
+  return "\<CR>"
+endfunction
+inoremap <silent> <CR> <C-R>=<SID>ExpandSnippetOrReturn()<CR>
+
 "}}}
 
 " 可视化缩进:{{{
@@ -403,8 +423,8 @@ let g:tagbar_compact=1
 
 " 多行编辑:{{{
 " vim-multiple-cursors 快捷键
-"let g:multi_cursor_next_key='<C-n>'
-"let g:multi_cursor_skip_key='<C-k>'
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_skip_key='<C-k>'
 "}}}
 
 " YCM设置:{{{
@@ -414,69 +434,27 @@ let g:tagbar_compact=1
 "" 选中项
 "highlight PmenuSel ctermfg=2 ctermbg=3 guifg=#AFD700 guibg=#106900
 " 补全功能在注释中同样有效
-"let g:loaded_youcompleteme = 1
 let g:ycm_complete_in_comments=1
-"在字符串输入中也能补全
-let g:ycm_complete_in_strings =1
-"注释和字符串中的文字也会被收入补全let
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
 " 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
 let g:ycm_confirm_extra_conf=0
 " 开启 YCM 标签补全引擎
 let g:ycm_collect_identifiers_from_tags_files=1
-" YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
-inoremap <leader>; <C-x><C-o>
-" 补全内容不以分割子窗口形式出现，只显示补全列表
-" set completeopt-=preview
-" 从第一个键入字符就开始罗列匹配项
-let g:ycm_min_num_of_chars_for_completion=1
 " 禁止缓存匹配项，每次都重新生成匹配项
 let g:ycm_cache_omnifunc=0
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
-" 跳到声明
-nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
+let g:ycm_add_preview_to_completeopt  =  1                  "补全预览是否打开
+let g:ycm_show_diagnostics_ui = 0                           "关闭ycm语法检查
+let g:ycm_server_log_level = 'info'
+"注释和字符串中的文字也会被收入补全let
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+"在字符串输入中也能补全
+let g:ycm_complete_in_strings =1
+let g:ycm_key_invoke_completion = '<c-x>'                   " 语义补全触发键
 " 优先跳到定义，没有定义就跳到声明
 nnoremap <F2> :YcmCompleter GoTo<CR>
 " 得到类型
 nnoremap <F3> :YcmCompleter GetType<CR>
-let g:ycm_show_diagnostics_ui = 0   "关闭ycm语法检查
-let g:ycm_add_preview_to_completeopt  =  1                  "补全预览是否打开
-let g:ycm_autoclose_preview_window_after_insertion  =  1    "非插入模式自动关闭预览窗口
-"set splitbelow                                              "预览窗口在底部
-
-" UltiSnips 和 ycm共用TAB
-"Enable tabbing through list of results
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call
-            UltiSnips#JumpForwards()
-            if
-                g:ulti_jump_forwards_res == 0
-                return  "\<TAB>"
-            endif
-        endif
-    endif
-    return
-endfunction
-
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-" Expand snippet or return
-let g:ulti_expand_res = 0
-function! Ulti_ExpandOrEnter()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res
-        return ''
-    else
-        return "\<return>"
-endfunction
-inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
-
 "}}}
 
 " ctrlsf: {{{
@@ -586,6 +564,7 @@ let g:asyncrun_encs = 'gbk'
 nmap <leader>d :cs find s <C-R>=expand("<cword>")<CR><CR>
 "g: 查找函数、宏、枚举等定义的位置
 map <C-]> :cs find g <C-R>=expand("<cword>")<CR><CR>
+map <C-o> <C-t>
 "c: 查找调用本函数的函数
 nmap <leader>s :cs find c <C-R>=expand("<cword>")<CR><CR>
 "
